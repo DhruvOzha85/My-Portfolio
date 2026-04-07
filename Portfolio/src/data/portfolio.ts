@@ -70,8 +70,6 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Specialized",
     skills: [
-      { name: "React Three Fiber", icon: "https://cdn.simpleicons.org/threedotjs", invertDark: true },
-      { name: "WebGL", icon: "https://cdn.simpleicons.org/webgl/990000" },
       { name: "3D Web Environments", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg", invertDark: true },
       { name: "UI/UX Interactive Design", icon: "https://cdn.simpleicons.org/framer/0055FF" },
     ],
