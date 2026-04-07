@@ -40,7 +40,7 @@ export function ProjectsSection() {
         {/* 12-Column Grid for precise Bento layouts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {sortedProjects.map((project, index) => {
-            const isFeatured = index === 0;
+            const isFeatured = project.id === 2 || project.id === 4;
 
             return (
               <motion.div
@@ -63,7 +63,7 @@ export function ProjectsSection() {
                     <div className={`relative overflow-hidden bg-secondary/30 flex items-center justify-center ${
                       isFeatured ? "lg:w-[60%] h-64 md:h-80 lg:h-[400px]" : "w-full h-56 md:h-64"
                     }`}>
-                      {isFeatured && (
+                      {project.id === 2 && (
                         <span className="absolute top-4 left-4 md:top-6 md:left-6 z-20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest bg-primary text-primary-foreground rounded-full shadow-xl flex items-center gap-2 backdrop-blur-md">
                           ✨ Flagship Project
                         </span>

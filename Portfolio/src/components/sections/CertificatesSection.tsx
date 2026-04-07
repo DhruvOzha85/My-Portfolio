@@ -47,29 +47,45 @@ export function CertificatesSection() {
                     transition={{ duration: 0.3, delay: index * 0.1 }}
                     whileHover={{ y: -5 }}
                     data-voice-target={`${cert.title.toLowerCase().replace(/[^a-z0-9]/g, "")}-cert`}
-                    className="bg-card rounded-xl p-6 border border-border hover:border-primary/50 transition-all shadow-sm hover:shadow-lg group cursor-none h-full flex flex-col"
+                    className="relative bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-all shadow-sm hover:shadow-lg group cursor-none h-64 md:h-72"
                   >
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                        <Award className="h-6 w-6" />
+                    {/* The Image (always visible) */}
+                    {cert.url !== "#" ? (
+                      <img
+                        src={cert.url}
+                        alt={cert.title}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-secondary/30">
+                        <Award className="h-12 w-12 text-muted-foreground opacity-50" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-display font-semibold text-lg leading-tight">
-                          {cert.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {cert.issuer} • {cert.date}
-                        </p>
+                    )}
+
+                    {/* Hover Overlay with Information */}
+                    <div className="absolute inset-0 bg-background/90 backdrop-blur-sm p-6 flex flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="p-3 rounded-lg bg-primary/10 text-primary transition-colors">
+                          <Award className="h-6 w-6" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-display font-semibold text-lg leading-tight text-foreground">
+                            {cert.title}
+                          </h3>
+                          <p className="text-sm text-foreground/80 mt-1">
+                            {cert.issuer} • {cert.date}
+                          </p>
+                        </div>
                       </div>
-                    </div>
 
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-grow">
-                      {cert.description}
-                    </p>
+                      <p className="text-sm text-foreground/70 mb-4 line-clamp-3 flex-grow">
+                        {cert.description}
+                      </p>
 
-                    <div className="mt-auto pt-4 border-t border-border/50 w-full">
-                      <div className="w-full py-2 px-4 rounded-lg border border-primary/20 bg-primary/5 text-primary text-center text-sm font-medium group-hover:bg-primary text-primary group-hover:text-primary-foreground transition-all duration-300">
-                        View Certificate
+                      <div className="mt-auto pt-4 border-t border-border/50 w-full">
+                        <div className="w-full py-2 px-4 rounded-lg bg-primary text-primary-foreground text-center text-sm font-medium transition-transform duration-300 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                          View Certificate
+                        </div>
                       </div>
                     </div>
                   </motion.div>
