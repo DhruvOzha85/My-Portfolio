@@ -9,6 +9,7 @@ import { ThemePicker } from "@/components/ThemePicker";
 import { cn } from "@/lib/utils";
 import { useArcadeMode } from "@/hooks/useArcadeMode";
 import { useQuantumTransition } from "@/hooks/useQuantumTransition";
+import { Logo } from "./Logo";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,14 +40,14 @@ export function Navbar() {
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
         <motion.a
           href="#home"
-          className="text-xl font-display font-bold gradient-text"
+          className="relative z-10"
           whileHover={{ scale: 1.05 }}
           onClick={(e) => {
             e.preventDefault();
             handleClick("#home");
           }}
         >
-          Dhruv Ozha
+          <Logo />
         </motion.a>
 
         {/* Desktop Navigation */}
@@ -79,7 +80,14 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 pl-4 border-l border-border">
+            <Button
+              variant="ghost"
+              className="text-sm font-medium text-muted-foreground hover:text-primary h-9 px-4 hidden lg:flex"
+              onClick={() => { playClick(); window.open("/DhruvOzha.pdf", "_blank"); }}
+            >
+              Resume
+            </Button>
             <Button
               variant="ghost"
               size="icon"
@@ -140,6 +148,17 @@ export function Navbar() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/DhruvOzha.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => { playClick(); setIsOpen(false); }}
+                  className="block py-2 text-lg font-medium text-primary"
+                >
+                  Resume
+                </a>
+              </li>
             </ul>
           </motion.div>
         )}

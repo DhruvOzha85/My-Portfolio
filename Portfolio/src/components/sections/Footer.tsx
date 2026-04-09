@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
-import { ArrowUp, Heart, Github, Linkedin, Instagram, Youtube } from "lucide-react";
+import { ArrowUp, Heart, Github, Linkedin, Youtube } from "lucide-react";
+import { LeetCodeLogo } from "@/components/ui/LeetCodeLogo";
 import { Button } from "@/components/ui/button";
 import { socialLinks } from "@/data/portfolio";
 
 const socialIcons = [
   { icon: Github, href: socialLinks.github, label: "GitHub" },
   { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
-  { icon: Instagram, href: socialLinks.instagram, label: "Instagram" },
+  { icon: LeetCodeLogo, href: socialLinks.leetcode, label: "LeetCode" },
   { icon: Youtube, href: socialLinks.youtube, label: "YouTube" },
 ];
 

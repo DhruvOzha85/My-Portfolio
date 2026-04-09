@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Instagram, Youtube, Twitter, ArrowDown } from "lucide-react";
+import { Github, Linkedin, Youtube, Twitter, ArrowDown } from "lucide-react";
+import { LeetCodeLogo } from "@/components/ui/LeetCodeLogo";
 import { Button } from "@/components/ui/button";
 import { socialLinks } from "@/data/portfolio";
 import { useSound } from "@/hooks/useSound";
@@ -13,7 +14,7 @@ const socialIcons = [
   { icon: Github, href: socialLinks.github, label: "GitHub" },
   { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
   { icon: XLogo, href: socialLinks.twitter, label: "X (Twitter)" },
-  { icon: Instagram, href: socialLinks.instagram, label: "Instagram" },
+  { icon: LeetCodeLogo, href: socialLinks.leetcode, label: "LeetCode" },
   { icon: Youtube, href: socialLinks.youtube, label: "YouTube" },
 ];
 
