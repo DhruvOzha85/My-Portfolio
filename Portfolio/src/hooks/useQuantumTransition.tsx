@@ -26,7 +26,14 @@ export function QuantumProvider({ children }: { children: React.ReactNode }) {
       const targetStr = targetId.startsWith("#") ? targetId : `#${targetId}`;
       const element = document.querySelector(targetStr);
       if (element) {
-        element.scrollIntoView({ behavior: "instant" }); // Instant snap since screen is obscured
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "instant"
+        });
       }
     }, 600); // 600ms corresponds to peak shatter effect
 

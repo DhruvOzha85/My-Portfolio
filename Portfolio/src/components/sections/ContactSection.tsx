@@ -11,6 +11,7 @@ import emailjs from '@emailjs/browser';
 import { XLogo } from "@/components/ui/XLogo";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const socialIcons = [
   { 
@@ -168,26 +169,30 @@ export function ContactSection() {
               </motion.a>
             </div>
 
-            <div>
-              <h4 className="font-display font-semibold mb-4">Follow Me</h4>
-              <div className="flex gap-3">
+              <div>
+                <h4 className="font-display font-semibold mb-4">Follow Me</h4>
+                <div className="flex gap-3">
                 {socialIcons.map(({ icon: Icon, href, label, hoverClass }) => (
                   <Tooltip key={label}>
                     <TooltipTrigger asChild>
-                      <motion.a
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={cn(
-                          "p-3 rounded-xl bg-secondary transition-colors",
-                          hoverClass || "hover:bg-primary hover:text-primary-foreground"
-                        )}
-                        whileHover={{ scale: 1.1, y: -4 }}
-                        whileTap={{ scale: 0.95 }}
-                        aria-label={label}
-                      >
-                        <Icon className="h-5 w-5" />
-                      </motion.a>
+                      <div>
+                        <MagneticWrapper strength={0.4} maxDistance={80}>
+                          <motion.a
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={cn(
+                              "w-11 h-11 flex items-center justify-center rounded-xl bg-secondary transition-colors",
+                              hoverClass || "hover:bg-primary hover:text-primary-foreground"
+                            )}
+                            whileHover={{ scale: 1.1, y: -4 }}
+                            whileTap={{ scale: 0.95 }}
+                            aria-label={label}
+                          >
+                            <Icon className="h-5 w-5" />
+                          </motion.a>
+                        </MagneticWrapper>
+                      </div>
                     </TooltipTrigger>
                     <TooltipContent side="bottom" className="font-medium">
                       {label}
@@ -243,19 +248,21 @@ export function ContactSection() {
                   disabled={isSubmitting}
                 />
               </div>
-              <Button type="submit" size="lg" className="w-full gradient-bg" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="h-5 w-5 mr-2 animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <Send className="h-5 w-5 mr-2" />
-                    Send Message
-                  </>
-                )}
-              </Button>
+              <MagneticWrapper strength={0.2} maxDistance={80}>
+                <Button type="submit" size="lg" className="w-full gradient-bg shadow-lg shadow-primary/20" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-5 w-5 mr-2" />
+                      Send Message
+                    </>
+                  )}
+                </Button>
+              </MagneticWrapper>
             </form>
           </motion.div>
         </div>

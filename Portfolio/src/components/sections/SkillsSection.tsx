@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { skillCategories } from "@/data/portfolio";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 export function SkillsSection() {
   const [activeTab, setActiveTab] = useState<string>("All");
@@ -13,7 +14,7 @@ export function SkillsSection() {
       : skillCategories.find((c) => c.title === activeTab)?.skills || [];
 
   return (
-    <section id="skills" className="section-padding bg-secondary/30 min-h-screen">
+    <section id="skills" className="section-padding relative">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -30,27 +31,27 @@ export function SkillsSection() {
           </p>
         </motion.div>
 
-        {/* Categories Tab Navigation */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`relative px-5 py-2.5 rounded-full text-sm md:text-base font-medium transition-colors duration-300 ${
-                activeTab === tab
-                  ? "text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground bg-secondary/50 hover:bg-secondary border border-border/50 shadow-sm"
-              }`}
-            >
-              {activeTab === tab && (
-                <motion.div
-                  layoutId="activeTabBadge"
-                  className="absolute inset-0 bg-primary rounded-full shadow-md"
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{tab}</span>
-            </button>
+            <MagneticWrapper key={tab} strength={0.2} maxDistance={60}>
+              <button
+                onClick={() => setActiveTab(tab)}
+                className={`relative px-5 py-2.5 rounded-full text-sm md:text-base font-medium transition-colors duration-300 ${
+                  activeTab === tab
+                    ? "text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground bg-secondary/50 hover:bg-secondary border border-border/50 shadow-sm"
+                }`}
+              >
+                {activeTab === tab && (
+                  <motion.div
+                    layoutId="activeTabBadge"
+                    className="absolute inset-0 bg-primary rounded-full shadow-md"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{tab}</span>
+              </button>
+            </MagneticWrapper>
           ))}
         </div>
 
@@ -66,7 +67,7 @@ export function SkillsSection() {
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.3 }}
                 whileHover={{ y: -5, scale: 1.03 }}
-                className="bg-card w-full rounded-2xl p-4 md:p-6 border border-border hover:border-primary/50 transition-colors shadow-sm hover:shadow-lg flex flex-col items-center justify-center gap-3 md:gap-4 cursor-default group"
+                className="bg-card w-full rounded-2xl p-4 md:p-6 border border-[var(--border-accent)] hover:border-[var(--accent-primary)]/50 transition-all duration-300 shadow-sm hover:shadow-xl hover:animate-accent-glow hover:glow-sm flex flex-col items-center justify-center gap-3 md:gap-4 cursor-default group"
               >
                 <div className="relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center bg-secondary/50 rounded-2xl p-3 md:p-3.5 group-hover:bg-primary/10 transition-colors duration-300">
                   <img

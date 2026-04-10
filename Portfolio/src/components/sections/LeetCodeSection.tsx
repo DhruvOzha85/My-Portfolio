@@ -3,26 +3,27 @@
  import { useState, useEffect, useMemo, lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { socialLinks } from "@/data/portfolio";
- import { supabase } from "@/integrations/supabase/client";
- import { Skeleton } from "@/components/ui/skeleton";
- 
- // Lazy load the activity heatmap for performance
- const ActivityHeatmap = lazy(() => import("./LeetCodeHeatmap").then(m => ({ default: m.LeetCodeHeatmap })));
- import { LeetCodeChart } from "./LeetCodeChart";
- 
- interface LeetCodeStats {
-   username: string;
-   totalSolved: number;
-   easySolved: number;
-   mediumSolved: number;
-   hardSolved: number;
-   totalQuestions: number;
-   easyTotal: number;
-   mediumTotal: number;
-   hardTotal: number;
-   ranking: number;
-   submissionCalendar: Record<string, number>;
- }
+import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
+import { LeetCodeChart } from "./LeetCodeChart";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
+
+// Lazy load the activity heatmap for performance
+const ActivityHeatmap = lazy(() => import("./LeetCodeHeatmap").then(m => ({ default: m.LeetCodeHeatmap })));
+
+interface LeetCodeStats {
+  username: string;
+  totalSolved: number;
+  easySolved: number;
+  mediumSolved: number;
+  hardSolved: number;
+  totalQuestions: number;
+  easyTotal: number;
+  mediumTotal: number;
+  hardTotal: number;
+  ranking: number;
+  submissionCalendar: Record<string, number>;
+}
  
  function StatCard({ 
    label, 
@@ -244,7 +245,7 @@ export function LeetCodeSection() {
   }, []);
  
   return (
-     <section id="leetcode" className="section-padding bg-gradient-to-b from-background to-card/20">
+     <section id="leetcode" className="section-padding">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -302,20 +303,22 @@ export function LeetCodeSection() {
                    )}
                  </div>
  
-                 <Button
-                   size="lg"
-                   className="bg-[#FFA116] hover:bg-[#FF9100] text-white flex-shrink-0"
-                   asChild
-                 >
-                   <a
-                     href={socialLinks.leetcode}
-                     target="_blank"
-                     rel="noopener noreferrer"
+                 <MagneticWrapper strength={0.4} maxDistance={100}>
+                   <Button
+                     size="lg"
+                     className="bg-[#FFA116] hover:bg-[#FF9100] text-white flex-shrink-0 shadow-lg shadow-[#FFA116]/20"
+                     asChild
                    >
-                     <ExternalLink className="h-5 w-5 mr-2" />
-                     Visit Profile
-                   </a>
-                 </Button>
+                     <a
+                       href={socialLinks.leetcode}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                     >
+                       <ExternalLink className="h-5 w-5 mr-2" />
+                       Visit Profile
+                     </a>
+                   </Button>
+                 </MagneticWrapper>
                </div>
             </div>
            </motion.div>

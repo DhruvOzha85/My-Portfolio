@@ -216,4 +216,30 @@
     background-color: #00d4ff;
     box-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.4);
   }
+
+  /* Premium Achievement Card Styles */
+  @keyframes accent-glow {
+    0%, 100% {
+      box-shadow: 0 0 15px -5px var(--glow-primary), 0 0 0 1px var(--border-accent);
+    }
+    50% {
+      box-shadow: 0 0 25px 2px var(--glow-primary), 0 0 0 2px var(--accent-primary);
+    }
+  }
+
+  .animate-accent-glow {
+    animation: accent-glow 4s ease-in-out infinite;
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 15px -5px var(--glow-primary);
+  }
+  .glow-md {
+    box-shadow: 0 0 25px -2px var(--glow-primary);
+  }
+
+  .dot-grid {
+    background-image: radial-gradient(var(--bg-grid-lines) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+  }
 }

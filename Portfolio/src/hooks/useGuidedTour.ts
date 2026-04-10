@@ -9,38 +9,43 @@ export interface TourStop {
 const tourStops: TourStop[] = [
   {
     sectionId: "home",
-    title: "Welcome",
-    narration: "Welcome to Dhruv Ozha's portfolio. I'm Jarvis, your personal guide. Let me walk you through what Dhruv has been building. Sit back and enjoy the tour.",
+    title: "Maison Link",
+    narration: "Initiating global protocol. Welcome to the neural interface of Dhruv Ozha. I am Jarvis. Data streams are synchronized. We are currently at the Mission Home. Awaiting your command to proceed to the next sector.",
   },
   {
     sectionId: "about",
-    title: "About Dhruv",
-    narration: "Here's a little about Dhruv. He's an aspiring software developer with a passion for building beautiful, functional web applications. He loves turning ideas into reality through clean code and creative design.",
+    title: "Biometric Data",
+    narration: "Sector: Profile Genesis. Accessing biometric archives. Dhruv is an architect of high-performance digital environments. His focus: React, Node.js, and advanced user experience design. Profile integrity: Excellent.",
   },
   {
     sectionId: "skills",
-    title: "Technical Skills",
-    narration: "These are Dhruv's technical skills. He works with React, JavaScript, Node.js, and many more modern technologies. Notice how the skill cards scroll infinitely, a nice touch of polish.",
+    title: "Technical Matrix",
+    narration: "Neural network analysis of the Capabilities Matrix complete. We are seeing a full-stack deployment of modern technologies. Note the infinite stream of technical mastery here—a robust foundation for any mission.",
+  },
+  {
+    sectionId: "achievements",
+    title: "Victory Archive",
+    narration: "Uplink to Victory Archives confirmed. This sector contains records of excellence and hackathon dominance. You can access the Mission Dossier for each victory to view insights or launch live project environments.",
   },
   {
     sectionId: "projects",
-    title: "Featured Projects",
-    narration: "Now let's look at the projects. Each one showcases different technical abilities, from pixel-perfect clones to AI-powered platforms. Click on any card to explore the live demos.",
+    title: "Forge Laboratory",
+    narration: "Entering the Project Laboratory. Each cell here represents a successful deployment of code to solve high-stakes problems. Our flagship, CropPilot, is fully interactive. You can launch the mission directly from this sector.",
   },
   {
     sectionId: "certificates",
-    title: "Certifications",
-    narration: "Dhruv has earned several professional certifications from companies like AWS, Walmart, and Skyscanner through the Forage platform. Each one represents real-world engineering challenges.",
+    title: "Trust Validation",
+    narration: "Sector: Standard Validation. Scanning official verification tokens. These certifications from AWS, Walmart, and Skyscanner verify Dhruv's proficiency in large-scale system engineering.",
   },
   {
     sectionId: "leetcode",
-    title: "LeetCode Journey",
-    narration: "Here's the competitive programming section. Dhruv actively practices data structures and algorithms on LeetCode. You can see the stats and submission activity right here.",
+    title: "Logic Core",
+    narration: "Logic Core telemetry active. Dhruv maintains a consistent practice of algorithmic optimization. Data structures and algorithms are synchronized. Performance metrics: Stable and high.",
   },
   {
     sectionId: "contact",
-    title: "Get In Touch",
-    narration: "And finally, the contact section. If you'd like to work with Dhruv or just say hello, feel free to reach out through any of these channels. Thanks for taking the tour! I hope you enjoyed it.",
+    title: "Communications Uplink",
+    narration: "Mission reaching final phase. Our Communications Uplink is locked. To collaborate or initiate a new mission, select your preferred channel. Jarvis, signing off. System standby. Connection terminated.",
   },
 ];
 

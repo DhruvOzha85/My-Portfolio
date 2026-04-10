@@ -271,12 +271,14 @@ export function HeroSection() {
             className="relative group flex items-center justify-center order-2"
           >
             <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
-              <div className="absolute inset-0 rounded-2xl gradient-bg opacity-50 blur-xl group-hover:opacity-70 transition-opacity" />
-              <img
-                src={profilePhoto}
-                alt="Dhruv Ozha"
-                className="relative w-full h-full object-cover rounded-2xl border-2 border-border shadow-2xl group-hover:scale-[1.02] transition-transform duration-500"
-              />
+              <div className="absolute inset-0 rounded-2xl gradient-bg opacity-40 blur-2xl group-hover:opacity-60 transition-opacity animate-pulse-slow" />
+              <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[var(--border-accent)] animate-accent-glow glow-md">
+                <img
+                  src={profilePhoto}
+                  alt="Dhruv Ozha"
+                  className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700"
+                />
+              </div>
             </div>
           </motion.div>
         </div>

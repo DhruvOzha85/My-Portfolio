@@ -83,15 +83,28 @@ export const interests = [
   { name: "Chess", icon: "♟️" },
 ];
 
-export const projects = [
+export interface Project {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  techStack: string[];
+  liveUrl: string;
+  githubUrl: string;
+  youtubeUrl?: string; // New field for video demos
+  featured: boolean;
+}
+
+export const projects: Project[] = [
   {
     id: 1,
-    title: "Web Clone Project",
-    description: "A pixel-perfect clone of a popular website showcasing frontend development skills with responsive design and modern CSS techniques.",
-    image: "/image.png",
-    techStack: ["HTML", "CSS", "JavaScript"],
-    liveUrl: "https://clonewebsite-one.vercel.app/",
-    githubUrl: "https://github.com/DhruvOzha85/Clone_Website",
+    title: "Honda Clone",
+    description: "A high-fidelity landing page clone of Honda's official site, featuring smooth GSAP animations, a responsive product showcase, and premium typography.",
+    image: "/honda_mockup.png",
+    techStack: ["HTML", "CSS", "JavaScript", "GSAP"],
+    liveUrl: "https://clonehonda.netlify.app/",
+    githubUrl: "https://github.com/DhruvOzha85/Honda_Clone",
+    youtubeUrl: "https://youtu.be/gwQ3pjXZNGE?si=Z6cjNDYtRF3riCI4",
     featured: true,
   },
   {
@@ -122,6 +135,61 @@ export const projects = [
     techStack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
     liveUrl: "https://pin-india.vercel.app/",
     githubUrl: "https://github.com/DhruvOzha85/PinIndia",
+    featured: true,
+  },
+  {
+    id: 5,
+    title: "Logitech Clone",
+    description: "A sleek, interactive clone of the Logitech homepage, highlighting precise animations and a modern consumer electronics aesthetic.",
+    image: "/logitech_mockup.png",
+    techStack: ["HTML", "CSS", "JavaScript", "ScrollTrigger"],
+    liveUrl: "https://clonelogitech.netlify.app/",
+    githubUrl: "https://github.com/DhruvOzha85/Logitech_Clone/tree/master",
+    youtubeUrl: "https://youtu.be/ZnkePykHz5A?si=A15m3JFgmUbdHBHJ",
+    featured: true,
+  },
+  {
+    id: 6,
+    title: "Photoroom Clone",
+    description: "A pixel-perfect recreation of the Photoroom landing page, focusing on clean layouts, high-quality image processing UI, and fluid transitions.",
+    image: "/photoroom_mockup.png",
+    techStack: ["HTML", "CSS", "JavaScript", "GSAP"],
+    liveUrl: "https://clonephotoroom.netlify.app/",
+    githubUrl: "https://github.com/DhruvOzha85/Photoroom_Clone",
+    youtubeUrl: "https://youtu.be/SobzlUf4YYs?si=NCzV0kiCktNxD8KB",
+    featured: true,
+  },
+  {
+    id: 7,
+    title: "Stacks Clone",
+    description: "A contemporary design clone for Stacks, showcasing modern typography, complex grid layouts, and interactive component states.",
+    image: "/stacks_mockup.png",
+    techStack: ["HTML", "CSS", "JavaScript", "GSAP"],
+    liveUrl: "https://clonestacks.netlify.app/",
+    githubUrl: "https://github.com/DhruvOzha85/Stacks_Clone/tree/master",
+    youtubeUrl: "https://youtu.be/ZqdwV_ah_Lk?si=kPCDNDe_LL0HU3fy",
+    featured: true,
+  },
+  {
+    id: 8,
+    title: "The Farmer Dog Clone",
+    description: "A vibrant and brand-accurate clone of The Farmer's Dog, featuring engaging storytelling through scroll-based animations and clean UI.",
+    image: "/farmerdog_mockup.png",
+    techStack: ["HTML", "CSS", "JavaScript", "GSAP"],
+    liveUrl: "https://clonethefarmerdog.netlify.app/",
+    githubUrl: "https://github.com/DhruvOzha85/TheFarmerDog_Clone",
+    youtubeUrl: "https://youtu.be/I770RKE69IQ?si=Cht4uL8Pbxh_f7WX",
+    featured: true,
+  },
+  {
+    id: 9,
+    title: "Zepto Clone",
+    description: "A high-performance clone of the Zepto delivery platform UI, optimized for quick navigation and a mobile-first commercial experience.",
+    image: "/zepto_mockup.png",
+    techStack: ["HTML", "CSS", "JavaScript", "GSAP"],
+    liveUrl: "https://clone-zepto.netlify.app/",
+    githubUrl: "https://github.com/DhruvOzha85/Zepto_Clone/tree/master",
+    youtubeUrl: "https://youtu.be/01tgMMf891Q?si=ysIizkspTnXRBh5b",
     featured: true,
   },
 ];
@@ -183,20 +251,21 @@ export const certificates = [
     date: "2026",
     url: "https://res.cloudinary.com/dd80on9gu/image/upload/v1770378457/Wells_Fargo_kctplx.png",
   },
-  {
-    id: 8,
-    title: "Comming Soon",
-    issuer: "Comming Soon",
-    description: "Stay tuned for upcoming certifications that will enhance my skills and knowledge.",
-    date: "2026",
-    url: "#",
-  },
+  // {
+  //   id: 8,
+  //   title: "Comming Soon",
+  //   issuer: "Comming Soon",
+  //   description: "Stay tuned for upcoming certifications that will enhance my skills and knowledge.",
+  //   date: "2026",
+  //   url: "#",
+  // },
 ];
 
 export const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
+  { label: "Achievements", href: "#achievements" },
   { label: "Projects", href: "#projects" },
   { label: "Certificates", href: "#certificates" },
   { label: "Contact", href: "#contact" },

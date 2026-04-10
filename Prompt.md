@@ -982,3 +982,155 @@ I want to be able to dictate my messages directly into the contact form.
 5. **UI Indicator:** Ensure the Voice Assistant UI component (likely a floating mic button) visually pulses or changes color to indicate when it is actively listening vs actively dictating into the form.
 
 Please provide the updated `VoiceAssistant.tsx` file incorporating this logic, along with instructions on what minor attributes need to be added to my `ContactSection` textarea and `ProjectsSection` buttons to make the connection complete.
+
+
+
+You are an expert frontend developer and UI/UX designer. I am working on my personal portfolio website hosted at https://dhruvozha-portfolio.vercel.app/ — built as a modern React/Next.js application with a dark-themed, developer-style aesthetic (likely using Tailwind CSS or custom CSS with a dark background, accent colors, smooth scroll sections, and a navbar).
+
+I need you to implement TWO major features:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FEATURE 1 — "ACHIEVEMENTS" SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Add a new full-width section to the portfolio page called "Achievements". This section should be placed after the Projects section and before the Contact section (or at a logical position in the page flow).
+
+SECTION HEADER:
+- Title: "Achievements 🏆"
+- Subtitle: Something like "Moments that defined the journey — hackathons, wins & collaborations."
+- Style it consistently with the rest of the portfolio's section headers (same font size, color, underline or accent decoration).
+
+ACHIEVEMENT CARDS — STRUCTURE:
+Each achievement is a card containing:
+
+1. PHOTO GALLERY (multiple photos per achievement):
+   - Each card has a photo carousel/slider with multiple hackathon photos.
+   - Navigation arrows (left/right) to scroll through images.
+   - Dot indicators at the bottom showing current image index.
+   - Photos should be displayed in a fixed-aspect-ratio container (16:9 or 4:3) with object-fit: cover so they look uniform regardless of upload dimensions.
+   - Add a subtle zoom-on-hover effect on the active photo.
+   - Optional: A small thumbnail strip below the main image for quick navigation.
+
+2. ACHIEVEMENT DETAILS (below or beside the photo gallery):
+   - Achievement Title (e.g., "Won 1st Place — HackNITR 5.0")
+   - Event Name & Date (e.g., "HackNITR 5.0 | March 2024")
+   - 📍 Location (e.g., "NIT Rourkela, Odisha")
+   - 🏆 Position/Award (e.g., "Winner", "Runner-up", "Top 10 Finalist")
+   - 📝 Project Description: 3–5 lines describing what the project was about, the problem solved, technologies used, and impact.
+   - 🔗 Optional links: GitHub repo, Devpost, Demo video — styled as small pill-buttons.
+
+3. TEAM SECTION (inside each card):
+   - Label: "👥 Team Members"
+   - Show each team member as a small avatar card with:
+     - Profile photo (circular, with a subtle border glow)
+     - Name
+     - Role (e.g., "Frontend Dev", "ML Engineer")
+     - Optional: LinkedIn icon linking to their profile
+   - Display team members in a horizontal flex row, wrapping on smaller screens.
+
+CARD LAYOUT:
+- On desktop (≥1024px): Two-column layout — photo gallery on the left, details + team on the right, side by side.
+- On tablet (768px–1023px): Stack vertically — photo gallery on top, details below.
+- On mobile (<768px): Full-width single column, all stacked.
+- Each card has a glassy/frosted card style (backdrop-filter: blur, semi-transparent dark background, subtle border with a gradient or accent color glow) consistent with a dark portfolio theme.
+- Add a soft entrance animation (fade-in + slide-up) when the card scrolls into viewport using IntersectionObserver or a library like framer-motion or AOS.
+
+MULTIPLE ACHIEVEMENTS:
+- All achievement cards are listed vertically, one after another, with spacing between them.
+- There should be no horizontal scrolling — vertical stacking only.
+- Each card is independently complete with its own photos, project info, and team.
+
+DATA STRUCTURE:
+Define a `achievements.js` (or `achievements.ts`) data file that exports an array of achievement objects. Each object should look like this:
+
+```js
+{
+  id: 1,
+  title: "Won 3rd Place — SU_HACKATHON,2026",
+  event: "SU_HACKATHON,2026",
+  date: "14-15 March 2026",
+  location: "Sangam University, Bhilwara, Rajasthan",
+  position: "Runner-up 🥈",
+  isLatest: true,   // ← used for the popup feature
+  projectDescription: "",
+  techStack: ["React", "Node.js", "Express.js", "MongoDB"],
+  links: {
+    github: "https://github.com/DhruvOzha85/SU_Hack",
+    demo: "https://croppilot-su.vercel.app/"
+  },
+  photos: [
+    "/Portfolio/public/Su4.jpg",
+    "/Portfolio/public/Su2.jpg",
+    "/Portfolio/public/Su3.jpg",
+    "/Portfolio/public/Su1.jpg",
+    "/Portfolio/public/Su5.jpg"
+  ],
+  team: [
+    { name: "Dhruv Ozha", role: "Git & Github", linkedin: "https://www.linkedin.com/in/dhruv-ozha-bb378639b/" },
+    { name: "Ritesh Gabale", role: "Fronted Dev", linkedin: "https://www.linkedin.com/in/ritesh-gabale-59a2b5365/" },
+    { name: "Maharshi Patel", role: "UI/UX Designer", linkedin: "https://www.linkedin.com/in/maharshi-patel-1b08b0395/?skipRedirect=true" },
+    { name: "Mahi Patel", role: "Backend Dev", linkedin: "https://www.linkedin.com/in/mahi-patel-1663b8367/" }
+  ]
+}
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FEATURE 2 — "LATEST ACHIEVEMENT" POPUP ON PAGE LOAD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When the portfolio website loads, after a 1.5 second delay, a beautiful popup/modal should appear showcasing the most recent/latest achievement (the one with `isLatest: true` in the data file, or simply the first item in the achievements array).
+
+POPUP DESIGN:
+- Centered modal with a dark glassy background (matching portfolio theme).
+- Semi-transparent dark overlay behind it (backdrop).
+- Close button (✕) in the top-right corner.
+- Inside the popup:
+  - 🎉 Animated badge or confetti burst (CSS or canvas-based) at the top — subtle, not overwhelming.
+  - Heading: "🏆 Latest Achievement!" in large bold text with an accent color.
+  - Achievement Title (e.g., "Won 1st Place — HackNITR 5.0")
+  - Event + Date + Location in smaller text.
+  - One featured photo from the achievement's photo array (the first photo).
+  - 2–3 line project description teaser.
+  - A CTA button: "View Full Details →" that smoothly scrolls the user to the Achievements section and closes the modal.
+  - A secondary text link: "Maybe later" that dismisses the popup.
+
+POPUP BEHAVIOR:
+- Appears once per session (use sessionStorage: if the user has already seen it during this browser session, don't show it again on refresh).
+- Smooth fade-in + scale-up entrance animation.
+- Smooth fade-out when closed.
+- Clicking outside the modal (on the backdrop) also closes it.
+- Fully responsive — on mobile it should appear as a bottom sheet or a compact centered modal.
+- Keyboard accessible: pressing Escape should close it.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NAVBAR UPDATE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Add "Achievements" as a new nav link in the existing navbar, placed between "Projects" and "Contact".
+- On click, it should smooth-scroll to the Achievements section (using the section's `id="achievements"` anchor).
+- The active state highlight should work correctly for this new section just like the other nav items.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STYLING CONSTRAINTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Match the EXACT visual style of the existing portfolio: dark background (#0a0a0a or similar), accent color (likely purple, cyan, or green — check and match the existing accent), same font family, same border-radius values, same button styles.
+- Do NOT introduce any new design system or component library unless the project already uses one.
+- All new animations must be subtle and professional — no garish effects.
+- Ensure the section and popup are fully responsive across: mobile (360px+), tablet (768px+), and desktop (1280px+).
+- Images must be lazy-loaded for performance.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DELIVERABLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Please provide:
+1. `achievements.js` — the data file with sample data pre-filled for at least 2 achievements.
+2. `AchievementCard.jsx` — the individual card component with photo carousel, project info, and team display.
+3. `AchievementsSection.jsx` — the full section wrapper that maps over achievements data and renders AchievementCard components.
+4. `AchievementPopup.jsx` — the on-load popup modal component.
+5. Updated `App.jsx` or `index.jsx` — showing where to place `<AchievementsSection />` and `<AchievementPopup />` in the component tree.
+6. Updated `Navbar.jsx` — with the new "Achievements" nav link added.
+7. Any required CSS (as a module, styled-component, or Tailwind classes — match what the project already uses).
+
+Make sure all components are clean, well-commented, and production-ready.

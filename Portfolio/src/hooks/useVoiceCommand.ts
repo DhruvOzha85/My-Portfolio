@@ -37,6 +37,10 @@ const sectionKeywords: Record<string, string> = {
   home: "home",
   leetcode: "leetcode",
   hero: "home",
+  achievement: "achievements",
+  achievements: "achievements",
+  insight: "achievements",
+  insights: "achievements",
 };
 
 // ─── Helpers ─────────────────────────────────────────────────────────
@@ -232,15 +236,30 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
 
       // ── 1. External Link Navigation ────────────────────────────
       const linkIntentMatch = command.match(
-        /(?:open|go to|visit|show me|show|launch)\s+(?:my\s+)?(.+)/
+        /(?:open|go to|visit|show me|show|launch|connect to)\s+(?:task|mission|my\s+)?(.+)/
       );
       if (linkIntentMatch) {
         const target = linkIntentMatch[1].trim();
+
+        // Special: "Launch [Project] Mission"
+        if (command.includes("launch") || command.includes("mission")) {
+           const projectTarget = target.replace("mission", "").trim();
+           const voiceEl = findVoiceTarget(projectTarget);
+           if (voiceEl) {
+             const demoBtn = voiceEl.closest('div')?.querySelector<HTMLElement>('[data-voice-target$="-demo"]');
+             if (demoBtn) {
+               demoBtn.click();
+               speakWithPause(`Initiating mission protocol for ${projectTarget}. Connection established.`);
+               return;
+             }
+           }
+        }
+
         // Check against external link keys
         for (const [key, link] of Object.entries(externalLinks)) {
           if (target.includes(key)) {
             openUrl(link.url, link.label);
-            speakWithPause(`Opening your ${link.label}`);
+            speakWithPause(`Establishing uplink to ${link.label}. Access granted.`);
             return;
           }
         }
@@ -250,7 +269,7 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
         if (voiceEl) {
           const label = voiceEl.dataset.voiceTarget || target;
           voiceEl.click();
-          speakWithPause(`Opening ${label.replace(/-/g, " ")}`);
+          speakWithPause(`Accessing ${label.replace(/-/g, " ")}. Telemetry stream active.`);
           return;
         }
 
@@ -260,7 +279,7 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
             const element = document.getElementById(sectionId);
             if (element) {
               element.scrollIntoView({ behavior: "smooth" });
-              speakWithPause(`Navigating to ${sectionId}`);
+              speakWithPause(`Navigating to sector: ${sectionId.toUpperCase()}. Scan complete.`);
               return;
             }
           }
@@ -272,14 +291,15 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
         command.includes("go to") ||
         command.includes("show me") ||
         command.includes("navigate to") ||
-        command.includes("scroll to")
+        command.includes("scroll to") ||
+        command.includes("access")
       ) {
         for (const [keyword, sectionId] of Object.entries(sectionKeywords)) {
           if (command.includes(keyword)) {
             const element = document.getElementById(sectionId);
             if (element) {
               element.scrollIntoView({ behavior: "smooth" });
-              speakWithPause(`Navigating to ${sectionId}`);
+              speakWithPause(`Sector ${sectionId.toUpperCase()} reached. Scanning vitals.`);
               return;
             }
           }
@@ -292,22 +312,36 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
         command.includes("source") ||
         command.includes("certificate") ||
         command.includes("live project") ||
-        command.includes("view resume")
+        command.includes("view resume") ||
+        command.includes("dossier") ||
+        command.includes("mission")
       ) {
         // "view resume" special case
         if (command.includes("view resume") || command.includes("resume")) {
           const resumeBtn = document.querySelector<HTMLElement>('[data-voice-target="resume"]');
           if (resumeBtn) {
             resumeBtn.click();
-            speakWithPause("Opening your resume");
+            speakWithPause("Retrieving professional qualifications. Resume uplink complete.");
             return;
           }
           const resumeSection = document.getElementById("resume");
           if (resumeSection) {
             resumeSection.scrollIntoView({ behavior: "smooth" });
-            speakWithPause("Navigating to resume section");
+            speakWithPause("Navigating to Resume sector.");
             return;
           }
+        }
+
+        // Special: "Open Dossier" (Project modal)
+        if (command.includes("dossier") || command.includes("insights")) {
+           const targetProject = command.replace("dossier", "").replace("insights", "").replace("show", "").replace("open", "").trim();
+           const voiceEl = findVoiceTarget(targetProject);
+           if (voiceEl) {
+              // Clicking the card itself usually opens the info
+              voiceEl.click();
+              speakWithPause(`Retrieving dossier for ${targetProject}. Decoding mission data.`);
+              return;
+           }
         }
 
         // Try fuzzy matching against data-voice-target elements
@@ -315,7 +349,7 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
         if (voiceEl) {
           const label = voiceEl.dataset.voiceTarget || "element";
           voiceEl.click();
-          speakWithPause(`Opening ${label.replace(/-/g, " ")}`);
+          speakWithPause(`Uplink to ${label.replace(/-/g, " ")} confirmed.`);
           return;
         }
       }
@@ -327,7 +361,8 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
         command.includes("start dictation") ||
         command.includes("fill the form") ||
         command.includes("dictate message") ||
-        command.includes("write message")
+        command.includes("write message") ||
+        command.includes("initialize uplink")
       ) {
         const contactEl = document.getElementById("contact");
         if (contactEl) {
@@ -336,38 +371,38 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
 
         setIsDictating(true);
         isDictatingRef.current = true;
-        speakWithPause("I am listening. What would you like to say in the message?");
+        speakWithPause("Voice dictation channel open. Awaiting mission status report.");
         return;
       }
 
       // ── 4. Scroll Commands ──────────────────────────────────────
-      if (command.includes("scroll down")) {
+      if (command.includes("scroll down") || command.includes("advance scroll")) {
         window.scrollBy({ top: window.innerHeight * 0.8, behavior: "smooth" });
-        setFeedback("Scrolling down");
+        setFeedback("Advancing scroll telemetry.");
         return;
       }
-      if (command.includes("scroll up")) {
+      if (command.includes("scroll up") || command.includes("retract scroll")) {
         window.scrollBy({ top: -window.innerHeight * 0.8, behavior: "smooth" });
-        setFeedback("Scrolling up");
+        setFeedback("Retracting scroll telemetry.");
         return;
       }
-      if (command.includes("scroll to top") || command.includes("go to top")) {
+      if (command.includes("scroll to top") || command.includes("return to home")) {
         window.scrollTo({ top: 0, behavior: "smooth" });
-        setFeedback("Scrolling to top");
+        setFeedback("Returning to Home sector.");
         return;
       }
 
       // ── 5. Theme Commands ───────────────────────────────────────
-      if (command.includes("theme") || command.includes("mode")) {
+      if (command.includes("theme") || command.includes("mode") || command.includes("visuals") || command.includes("style")) {
         const targetTheme = themes.find((t) => command.includes(t.name.toLowerCase()));
         if (targetTheme) {
           setTheme(targetTheme.id as ThemeName);
-          speakWithPause(`Changed theme to ${targetTheme.name}`);
+          speakWithPause(`Visual matrix synchronized to ${targetTheme.name} theme.`);
           return;
         }
         if (command.includes("auto")) {
           setTheme("auto");
-          speakWithPause("Enabled Auto Theme Sync");
+          speakWithPause("Sector lighting set to Auto-Sync.");
           return;
         }
       }
@@ -375,27 +410,29 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
       // ── 6. Tour Commands ────────────────────────────────────────
       if (
         command.includes("start tour") ||
-        command.includes("begin tour") ||
+        command.includes("begin mission") ||
         command.includes("give me a tour") ||
-        command.includes("guided tour")
+        command.includes("guided tour") ||
+        command.includes("commence protocol")
       ) {
-        setFeedback("Starting Guided Tour...");
+        setFeedback("Commencing guided mission tour...");
         onTourCommand?.("start");
         return;
       }
       if (
         command.includes("stop tour") ||
         command.includes("end tour") ||
-        command.includes("cancel tour")
+        command.includes("terminate mission") ||
+        command.includes("abort tour")
       ) {
-        setFeedback("Stopping tour...");
+        setFeedback("Terminating mission tour.");
         onTourCommand?.("stop");
         return;
       }
 
       // ── 7. Fallback ────────────────────────────────────────────
       speakWithPause(
-        "I didn't catch that. You can ask me to open links, view projects, or write a message."
+        "Input signature not recognized. Please consult the Operation Manual for supported voice triggers."
       );
     },
     [setTheme, themes, onTourCommand, speakWithPause]

@@ -72,7 +72,7 @@ export function Navbar() {
                   {activeSection === item.href.slice(1) && (
                     <motion.span
                       layoutId="activeSection"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--accent-primary)] rounded-full animate-accent-glow glow-sm"
                     />
                   )}
                 </a>
