@@ -9,13 +9,40 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { toast } from "sonner";
 import emailjs from '@emailjs/browser';
 import { XLogo } from "@/components/ui/XLogo";
+import { cn } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const socialIcons = [
-  { icon: Github, href: socialLinks.github, label: "GitHub" },
-  { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
-  { icon: XLogo, href: socialLinks.twitter, label: "X (Twitter)" },
-  { icon: LeetCodeLogo, href: socialLinks.leetcode, label: "LeetCode" },
-  { icon: Youtube, href: socialLinks.youtube, label: "YouTube" },
+  { 
+    icon: Github, 
+    href: socialLinks.github, 
+    label: "GitHub",
+    hoverClass: "hover:bg-[#181717] hover:text-white" 
+  },
+  { 
+    icon: Linkedin, 
+    href: socialLinks.linkedin, 
+    label: "LinkedIn",
+    hoverClass: "hover:bg-[#0A66C2] hover:text-white" 
+  },
+  { 
+    icon: XLogo, 
+    href: socialLinks.twitter, 
+    label: "X (Twitter)",
+    hoverClass: "hover:bg-[#000000] hover:text-white" 
+  },
+  { 
+    icon: LeetCodeLogo, 
+    href: socialLinks.leetcode, 
+    label: "LeetCode",
+    hoverClass: "hover:bg-[#FFA116] hover:text-white" 
+  },
+  { 
+    icon: Youtube, 
+    href: socialLinks.youtube, 
+    label: "YouTube",
+    hoverClass: "hover:bg-[#FF0000] hover:text-white" 
+  },
 ];
 
 export function ContactSection() {
@@ -144,19 +171,28 @@ export function ContactSection() {
             <div>
               <h4 className="font-display font-semibold mb-4">Follow Me</h4>
               <div className="flex gap-3">
-                {socialIcons.map(({ icon: Icon, href, label }) => (
-                  <motion.a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors"
-                    whileHover={{ scale: 1.1, y: -4 }}
-                    whileTap={{ scale: 0.95 }}
-                    aria-label={label}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </motion.a>
+                {socialIcons.map(({ icon: Icon, href, label, hoverClass }) => (
+                  <Tooltip key={label}>
+                    <TooltipTrigger asChild>
+                      <motion.a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                          "p-3 rounded-xl bg-secondary transition-colors",
+                          hoverClass || "hover:bg-primary hover:text-primary-foreground"
+                        )}
+                        whileHover={{ scale: 1.1, y: -4 }}
+                        whileTap={{ scale: 0.95 }}
+                        aria-label={label}
+                      >
+                        <Icon className="h-5 w-5" />
+                      </motion.a>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" className="font-medium">
+                      {label}
+                    </TooltipContent>
+                  </Tooltip>
                 ))}
               </div>
             </div>

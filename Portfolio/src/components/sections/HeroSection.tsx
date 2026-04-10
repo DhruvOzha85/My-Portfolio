@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Youtube, Twitter, ArrowDown } from "lucide-react";
+import { Github, Linkedin, Youtube, ArrowDown } from "lucide-react";
 import { LeetCodeLogo } from "@/components/ui/LeetCodeLogo";
 import { Button } from "@/components/ui/button";
 import { socialLinks } from "@/data/portfolio";
@@ -9,13 +10,39 @@ import profilePhoto from "@/assets/D11.png";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { useQuantumTransition } from "@/hooks/useQuantumTransition";
 import { XLogo } from "@/components/ui/XLogo";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const socialIcons = [
-  { icon: Github, href: socialLinks.github, label: "GitHub" },
-  { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
-  { icon: XLogo, href: socialLinks.twitter, label: "X (Twitter)" },
-  { icon: LeetCodeLogo, href: socialLinks.leetcode, label: "LeetCode" },
-  { icon: Youtube, href: socialLinks.youtube, label: "YouTube" },
+  { 
+    icon: Github, 
+    href: socialLinks.github, 
+    label: "GitHub",
+    hoverClass: "hover:bg-[#181717] hover:text-white" 
+  },
+  { 
+    icon: Linkedin, 
+    href: socialLinks.linkedin, 
+    label: "LinkedIn",
+    hoverClass: "hover:bg-[#0A66C2] hover:text-white" 
+  },
+  { 
+    icon: XLogo, 
+    href: socialLinks.twitter, 
+    label: "X (Twitter)",
+    hoverClass: "hover:bg-[#000000] hover:text-white" 
+  },
+  { 
+    icon: LeetCodeLogo, 
+    href: socialLinks.leetcode, 
+    label: "LeetCode",
+    hoverClass: "hover:bg-[#FFA116] hover:text-white" 
+  },
+  { 
+    icon: Youtube, 
+    href: socialLinks.youtube, 
+    label: "YouTube",
+    hoverClass: "hover:bg-[#FF0000] hover:text-white" 
+  },
 ];
 
 export function HeroSection() {
@@ -206,20 +233,32 @@ export function HeroSection() {
               transition={{ delay: 0.8 }}
               className="flex items-center justify-center md:justify-start gap-4 pt-4"
             >
-              {socialIcons.map(({ icon: Icon, href, label }) => (
-                <MagneticWrapper key={label} strength={0.5} maxDistance={80}>
-                  <motion.a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 flex items-center justify-center rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors shrink-0"
-                    whileHover={{ scale: 1.1, y: -4 }}
-                    whileTap={{ scale: 0.95 }}
-                    aria-label={label}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </motion.a>
-                </MagneticWrapper>
+              {socialIcons.map(({ icon: Icon, href, label, hoverClass }) => (
+                <Tooltip key={label}>
+                  <TooltipTrigger asChild>
+                    <div>
+                      <MagneticWrapper strength={0.5} maxDistance={80}>
+                        <motion.a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={cn(
+                            "w-12 h-12 flex items-center justify-center rounded-full bg-secondary transition-colors shrink-0",
+                            hoverClass || "hover:bg-primary hover:text-primary-foreground"
+                          )}
+                          whileHover={{ scale: 1.1, y: -4 }}
+                          whileTap={{ scale: 0.95 }}
+                          aria-label={label}
+                        >
+                          <Icon className="h-5 w-5" />
+                        </motion.a>
+                      </MagneticWrapper>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" className="font-medium">
+                    {label}
+                  </TooltipContent>
+                </Tooltip>
               ))}
             </motion.div>
           </motion.div>
