@@ -14,7 +14,7 @@ export function SkillsSection() {
       : skillCategories.find((c) => c.title === activeTab)?.skills || [];
 
   return (
-    <section id="skills" className="section-padding relative">
+    <section id="skills" className="section-padding relative" aria-label="Technical Skills">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -73,6 +73,8 @@ export function SkillsSection() {
                   <img
                     src={skill.icon}
                     alt={skill.name}
+                    loading="lazy"
+                    decoding="async"
                     className={`w-full h-full object-contain transition-all duration-300 drop-shadow-sm ${
                       skill.invertDark ? "dark:invert opacity-80 group-hover:opacity-100" : ""
                     }`}

@@ -162,8 +162,9 @@ function ProjectCard({
             <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent z-10 opacity-50" />
             <img
               src={project.image}
-              alt={project.title}
-              loading="eager"
+              alt={`${project.title} — ${project.techStack.join(", ")} project by Dhruv Ozha`}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
             />
           </div>

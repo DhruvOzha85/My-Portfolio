@@ -262,11 +262,11 @@ export const certificates = [
 ];
 
 export const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Achievements", href: "#achievements" },
-  { label: "Projects", href: "#projects" },
-  { label: "Certificates", href: "#certificates" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Skills", href: "/skills" },
+  { label: "Achievements", href: "/achievements" },
+  { label: "Projects", href: "/projects" },
+  { label: "Certificates", href: "/certificates" },
+  { label: "Contact", href: "/contact" },
 ];

@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { useArcadeMode } from "@/hooks/useArcadeMode";
 import { useQuantumTransition } from "@/hooks/useQuantumTransition";
 import { Logo } from "./Logo";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,18 +18,14 @@ export function Navbar() {
   const { playClick } = useSound();
   const { toggleArcade } = useArcadeMode();
   const { warpTo } = useQuantumTransition();
+  const navigate = useNavigate();
 
   const handleClick = (href: string) => {
     playClick();
     setIsOpen(false);
     
-    const targetSection = href.slice(1);
-    
-    if (activeSection === targetSection) return;
-    
-    // Instantly update the UI so it doesn't wait for scroll to finish
-    setActiveSection(targetSection);
-    warpTo(href);
+    // Now we just navigate. The NavigationManager handles the warp effect.
+    navigate(href);
   };
 
   return (
@@ -37,45 +34,42 @@ export function Navbar() {
       animate={{ y: 0 }}
       className="fixed top-0 left-0 right-0 z-50 glass"
     >
-      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <motion.a
-          href="#home"
+      <nav className="container mx-auto px-4 py-4 flex items-center justify-between" aria-label="Main navigation">
+        <NavLink
+          to="/"
           className="relative z-10"
-          whileHover={{ scale: 1.05 }}
           onClick={(e) => {
             e.preventDefault();
-            handleClick("#home");
+            handleClick("/");
           }}
         >
           <Logo />
-        </motion.a>
+        </NavLink>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           <ul className="flex items-center gap-6">
             {navItems.map((item) => (
               <li key={item.href}>
-                <a
-                  href={item.href}
+                <NavLink
+                  to={item.href}
                   onClick={(e) => {
                     e.preventDefault();
                     handleClick(item.href);
                   }}
-                  className={cn(
+                  className={({ isActive }) => cn(
                     "text-sm font-medium transition-colors hover:text-primary relative py-2",
-                    activeSection === item.href.slice(1)
-                      ? "text-primary"
-                      : "text-muted-foreground"
+                    isActive ? "text-primary" : "text-muted-foreground"
                   )}
                 >
                   {item.label}
-                  {activeSection === item.href.slice(1) && (
+                  {activeSection === (item.href === "/" ? "home" : item.href.slice(1)) && (
                     <motion.span
                       layoutId="activeSection"
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--accent-primary)] rounded-full animate-accent-glow glow-sm"
                     />
                   )}
-                </a>
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -131,21 +125,19 @@ export function Navbar() {
             <ul className="container mx-auto px-4 py-4 flex flex-col gap-4">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <a
-                    href={item.href}
+                  <NavLink
+                    to={item.href}
                     onClick={(e) => {
                       e.preventDefault();
                       handleClick(item.href);
                     }}
-                    className={cn(
+                    className={({ isActive }) => cn(
                       "block py-2 text-lg font-medium transition-colors",
-                      activeSection === item.href.slice(1)
-                        ? "text-primary"
-                        : "text-muted-foreground"
+                      isActive ? "text-primary" : "text-muted-foreground"
                     )}
                   >
                     {item.label}
-                  </a>
+                  </NavLink>
                 </li>
               ))}
               <li>

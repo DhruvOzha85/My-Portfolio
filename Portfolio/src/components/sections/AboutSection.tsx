@@ -3,7 +3,7 @@ import { interests } from "@/data/portfolio";
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-28 md:py-40">
+    <section id="about" className="py-28 md:py-40" aria-label="About Dhruv Ozha">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

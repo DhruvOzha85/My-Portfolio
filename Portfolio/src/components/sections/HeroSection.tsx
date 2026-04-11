@@ -9,6 +9,7 @@ import { useSound } from "@/hooks/useSound";
 import profilePhoto from "@/assets/D11.png";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { useQuantumTransition } from "@/hooks/useQuantumTransition";
+import { useNavigate } from "react-router-dom";
 import { XLogo } from "@/components/ui/XLogo";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -138,13 +139,15 @@ export function HeroSection() {
     }
   };
 
+  const navigate = useNavigate();
+ 
   const scrollTo = (href: string) => {
     playClick();
-    warpTo(href);
+    navigate(href.replace("#", "/"));
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center relative pt-20">
+    <section id="home" className="min-h-screen flex items-center relative pt-20" aria-label="Introduction">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Column — Content */}
@@ -275,8 +278,13 @@ export function HeroSection() {
               <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[var(--border-accent)] animate-accent-glow glow-md">
                 <img
                   src={profilePhoto}
-                  alt="Dhruv Ozha"
+                  alt="Dhruv Ozha — Full Stack Web Developer and React Specialist"
                   className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+                  width="384"
+                  height="384"
                 />
               </div>
             </div>

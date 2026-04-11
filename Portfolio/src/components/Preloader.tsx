@@ -49,7 +49,7 @@ export const Preloader = () => {
     const countObj = { value: 0 };
     tl.to(countObj, {
       value: 100,
-      duration: 1.5,
+      duration: 1.2,
       ease: "power2.inOut",
       onUpdate: () => {
         if (counterRef.current) {
@@ -61,32 +61,32 @@ export const Preloader = () => {
     tl.fromTo(
       progressRef.current,
       { width: "0%" },
-      { width: "100%", duration: 1.5, ease: "power2.inOut" },
+      { width: "100%", duration: 1.2, ease: "power2.inOut" },
       1.0
     );
 
-    tl.to(counterRef.current, { scale: 1.1, duration: 0.1, ease: "power1.out" }, 2.5);
+    tl.to(counterRef.current, { scale: 1.1, duration: 0.1, ease: "power1.out" }, 2.2);
 
-    // --- Phase 3: Shatter & WELCOME reveal (2.5s - 3.5s) ---
+    // --- Phase 3: Shatter & WELCOME reveal (1.3s - 1.9s) ---
     tl.to([counterRef.current, progressWrapperRef.current], {
       scale: 1.3,
       opacity: 0,
       filter: "blur(10px)",
       duration: 0.2,
       ease: "power2.in",
-    }, 2.6);
+    }, 2.3);
 
     tl.fromTo(
       welcomeRef.current,
       { scale: 2, opacity: 0, display: "none" },
       { scale: 1, opacity: 1, display: "block", duration: 0.3, ease: "back.out(2)" },
-      2.8
+      2.5
     );
 
     tl.to(
       welcomeRef.current,
       { scale: 0.9, opacity: 0, filter: "blur(5px)", duration: 0.2 },
-      3.2
+      3.0
     );
 
     // --- Phase 4: Identity Reveal (3.2s - 3.8s) ---

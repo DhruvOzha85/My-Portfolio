@@ -115,7 +115,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-padding">
+    <section id="contact" className="section-padding" aria-label="Contact Information">
       <div className="container mx-auto px-4">
         {/* ... (existing header code) ... */}
         <motion.div
