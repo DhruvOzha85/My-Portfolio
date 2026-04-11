@@ -6,27 +6,26 @@ export function useActiveSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the visible section with highest intersection ratio
         let maxRatio = 0;
         let selectedId = "";
         
         entries.forEach((entry) => {
-          // If a section is large enough to cover the viewport, intersectionRatio might be low
-          // because it's only a fraction of the section's total height.
-          // We calculate its "viewport occupancy" - how much of the viewport it fills.
+          // Calculate how much of the viewport this section occupies
           const viewportRatio = entry.intersectionRect.height / entry.rootBounds!.height;
           
+          // We also check intersectionRatio to ensure it's actually in view
           if (entry.isIntersecting && viewportRatio > maxRatio) {
             maxRatio = viewportRatio;
             selectedId = entry.target.id;
           }
         });
 
+        // Always prioritize the section that occupies most of the viewport
         if (selectedId) setActiveSection(selectedId);
       },
       {
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-        rootMargin: "-20% 0px -20% 0px", // Focus on the center 60% of viewport
+        rootMargin: "-10% 0px -40% 0px", // Biased towards the top of the viewport
       }
     );
 

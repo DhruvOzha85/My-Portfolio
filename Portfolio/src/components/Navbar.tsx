@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { useArcadeMode } from "@/hooks/useArcadeMode";
 import { useQuantumTransition } from "@/hooks/useQuantumTransition";
 import { Logo } from "./Logo";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +19,14 @@ export function Navbar() {
   const { toggleArcade } = useArcadeMode();
   const { warpTo } = useQuantumTransition();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  // Combine route path and intersection observer for robust highlighting
+  const currentPathSection = pathname === "/" ? "home" : pathname.slice(1);
+  const isSelected = (itemHref: string) => {
+    const itemSection = itemHref === "/" ? "home" : itemHref.slice(1);
+    return currentPathSection === itemSection || activeSection === itemSection;
+  };
 
   const handleClick = (href: string) => {
     playClick();
@@ -63,7 +71,7 @@ export function Navbar() {
                   )}
                 >
                   {item.label}
-                  {activeSection === (item.href === "/" ? "home" : item.href.slice(1)) && (
+                  {isSelected(item.href) && (
                     <motion.span
                       layoutId="activeSection"
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--accent-primary)] rounded-full animate-accent-glow glow-sm"
