@@ -8,7 +8,6 @@ import { socialLinks } from "@/data/portfolio";
 import { useSound } from "@/hooks/useSound";
 import profilePhoto from "@/assets/D11.png";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
-import { useQuantumTransition } from "@/hooks/useQuantumTransition";
 import { useNavigate } from "react-router-dom";
 import { XLogo } from "@/components/ui/XLogo";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -48,7 +47,6 @@ const socialIcons = [
 
 export function HeroSection() {
   const { playClick } = useSound();
-  const { warpTo } = useQuantumTransition();
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -143,7 +141,8 @@ export function HeroSection() {
  
   const scrollTo = (href: string) => {
     playClick();
-    navigate(href.replace("#", "/"));
+    const target = href.replace("#", "/");
+    navigate(target === "/home" ? "/" : target);
   };
 
   return (
@@ -281,7 +280,7 @@ export function HeroSection() {
                   alt="Dhruv Ozha — Full Stack Web Developer and React Specialist"
                   className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700"
                   loading="eager"
-                  fetchpriority="high"
+                  fetchPriority="high"
                   decoding="async"
                   width="384"
                   height="384"
