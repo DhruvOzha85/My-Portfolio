@@ -42,6 +42,7 @@ const App = () => (
                 <Route path="/achievements" element={<Index />} />
                 <Route path="/projects" element={<Index />} />
                 <Route path="/certificates" element={<Index />} />
+                <Route path="/leetcode" element={<Index />} />
                 <Route path="/contact" element={<Index />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

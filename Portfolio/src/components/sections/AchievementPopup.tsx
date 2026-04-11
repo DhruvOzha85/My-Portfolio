@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { achievements } from "@/data/achievements";
 import { useQuantumTransition } from "@/hooks/useQuantumTransition";
-import { useActiveSection } from "@/hooks/useActiveSection";
+import { useNavigate } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -27,7 +27,7 @@ export function AchievementPopup() {
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const { warpTo } = useQuantumTransition();
-  const { setActiveSection } = useActiveSection();
+  const navigate = useNavigate();
 
   // Find the latest achievement
   const latestAchievement = achievements.find(a => a.isLatest) || achievements[0];
@@ -57,11 +57,10 @@ export function AchievementPopup() {
 
   const handleViewDetails = () => {
     setIsOpen(false);
-    // Give it a tiny bit of time to start the dialog exit animation
+    // Navigate and trigger smooth warp through NavigationManager
     setTimeout(() => {
-      setActiveSection("achievements");
-      warpTo("#achievements");
-    }, 100);
+      navigate("/achievements", { state: { manualNav: true } });
+    }, 150);
   };
 
   if (!latestAchievement) return null;

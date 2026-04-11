@@ -142,7 +142,8 @@ export function HeroSection() {
   const scrollTo = (href: string) => {
     playClick();
     const target = href.replace("#", "/");
-    navigate(target === "/home" ? "/" : target);
+    const finalPath = target === "/home" ? "/" : target;
+    navigate(finalPath, { state: { manualNav: true } });
   };
 
   return (

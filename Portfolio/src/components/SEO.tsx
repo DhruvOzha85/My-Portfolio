@@ -22,6 +22,7 @@ export function SEO({ title, description }: SEOProps) {
     "/achievements": "Achievements & Awards",
     "/projects": "Featured projects",
     "/certificates": "Certifications",
+    "/leetcode": "LeetCode Journey",
     "/contact": "Get in Touch",
   };
 

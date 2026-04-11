@@ -6,6 +6,7 @@ import { SEO } from "@/components/SEO";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { Footer } from "@/components/sections/Footer";
+import { useActiveSection } from "@/hooks/useActiveSection";
 import type { Achievement } from "@/data/achievements";
 
 // Lazy-load heavy / below-fold components to reduce initial bundle
@@ -20,6 +21,7 @@ const AchievementPopup = lazy(() => import("@/components/sections/AchievementPop
 const ImageLightbox = lazy(() => import("@/components/sections/ImageLightbox").then(m => ({ default: m.ImageLightbox })));
 
 const Index = () => {
+  useActiveSection();
   const [lightboxData, setLightboxData] = useState<{ achievement: Achievement; startIndex: number } | null>(null);
 
   return (

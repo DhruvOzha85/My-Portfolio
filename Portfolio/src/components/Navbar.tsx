@@ -14,18 +14,15 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { activeSection, setActiveSection } = useActiveSection();
   const { playClick } = useSound();
   const { toggleArcade } = useArcadeMode();
   const { warpTo } = useQuantumTransition();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  // Combine route path and intersection observer for robust highlighting
-  const currentPathSection = pathname === "/" ? "home" : pathname.slice(1);
+  // Highlight strictly based on the URL route
   const isSelected = (itemHref: string) => {
-    const itemSection = itemHref === "/" ? "home" : itemHref.slice(1);
-    return currentPathSection === itemSection || activeSection === itemSection;
+    return pathname === itemHref;
   };
 
   const handleClick = (href: string) => {
@@ -33,7 +30,8 @@ export function Navbar() {
     setIsOpen(false);
     
     // Now we just navigate. The NavigationManager handles the warp effect.
-    navigate(href);
+    // We pass manualNav: true so the manager knows to trigger the warp animation.
+    navigate(href, { state: { manualNav: true } });
   };
 
   return (

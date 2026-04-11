@@ -221,15 +221,15 @@ export function LeetCodeSection() {
           console.warn('Live LeetCode stats failed, using fallback mock data:', apiErr);
           setStats({
             username: username,
-            totalSolved: 145,
+            totalSolved: 23,
             totalQuestions: 3300,
-            easySolved: 82,
+            easySolved: 21,
             easyTotal: 820,
-            mediumSolved: 54,
+            mediumSolved: 2,
             mediumTotal: 1720,
-            hardSolved: 9,
+            hardSolved: 0,
             hardTotal: 760,
-            ranking: 124530,
+            ranking: 3789342,
             submissionCalendar: generateMockCalendar() 
           });
         }

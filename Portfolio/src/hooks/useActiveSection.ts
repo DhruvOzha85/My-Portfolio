@@ -1,31 +1,51 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function useActiveSection() {
-  const [activeSection, setActiveSection] = useState("home");
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const currentPathRef = useRef(pathname);
+  const isNavigating = useRef(false);
+
+  // Keep the ref in sync with the current URL
+  useEffect(() => {
+    currentPathRef.current = pathname;
+  }, [pathname]);
 
   useEffect(() => {
+    // We only set up ONE observer that lives for the lifetime of the component
     const observer = new IntersectionObserver(
       (entries) => {
+        // If we are currently in middle of an automated navigation, skip detection
+        if (isNavigating.current) return;
+
         let maxRatio = 0;
         let selectedId = "";
         
         entries.forEach((entry) => {
-          // Calculate how much of the viewport this section occupies
           const viewportRatio = entry.intersectionRect.height / entry.rootBounds!.height;
-          
-          // We also check intersectionRatio to ensure it's actually in view
           if (entry.isIntersecting && viewportRatio > maxRatio) {
             maxRatio = viewportRatio;
             selectedId = entry.target.id;
           }
         });
 
-        // Always prioritize the section that occupies most of the viewport
-        if (selectedId) setActiveSection(selectedId);
+        if (selectedId) {
+          const newPath = selectedId === "home" ? "/" : `/${selectedId}`;
+          
+          if (newPath !== currentPathRef.current) {
+            isNavigating.current = true;
+            navigate(newPath, { replace: true });
+            
+            setTimeout(() => {
+              isNavigating.current = false;
+            }, 150);
+          }
+        }
       },
       {
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-        rootMargin: "-10% 0px -40% 0px", // Biased towards the top of the viewport
+        threshold: [0, 0.1, 0.5, 0.9, 1],
+        rootMargin: "-40% 0px -40% 0px", // Sharp focus on the center 20%
       }
     );
 
@@ -34,8 +54,9 @@ export function useActiveSection() {
 
     return () => {
       sections.forEach((section) => observer.unobserve(section));
+      observer.disconnect();
     };
-  }, []);
+  }, [navigate]); // navigate is stable, so this only runs once on mount
 
-  return { activeSection, setActiveSection };
+  return null;
 }
