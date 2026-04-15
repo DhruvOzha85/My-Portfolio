@@ -6,15 +6,23 @@
 @tailwind utilities;
 
 @layer base {
+
   /* Global smooth theme transition */
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     transition: var(--transition-theme);
   }
 
   /* Disable transition for animation-critical elements */
-  .animate-marquee, .animate-marquee *, 
-  [class*="animate-"], canvas, video, 
-  .typewriter-cursor, .glitch-text::before, .glitch-text::after {
+  .animate-marquee,
+  .animate-marquee *,
+  [class*="animate-"],
+  canvas,
+  video,
+  .typewriter-cursor,
+  .glitch-text::before,
+  .glitch-text::after {
     transition: none !important;
   }
 
@@ -35,7 +43,12 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-family-heading);
     font-weight: var(--font-weight-heading);
     letter-spacing: var(--letter-spacing-heading);
@@ -81,6 +94,7 @@
   a {
     color: var(--text-link);
   }
+
   a:hover {
     color: var(--text-link-hover);
   }
@@ -123,6 +137,7 @@
     @apply transition-all duration-300 hover:-translate-y-2;
     box-shadow: var(--shadow-md);
   }
+
   .hover-lift:hover {
     box-shadow: var(--shadow-xl);
   }
@@ -138,9 +153,12 @@
   }
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-20px);
     }
@@ -159,9 +177,17 @@
     animation: blink 1s step-end infinite;
     vertical-align: text-bottom;
   }
+
   @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+    }
   }
 
   /* Glitch Text Effect */
@@ -169,6 +195,7 @@
     position: relative;
     display: inline-block;
   }
+
   .glitch-text::before,
   .glitch-text::after {
     content: attr(data-text);
@@ -179,11 +206,13 @@
     height: 100%;
     opacity: 0.8;
   }
+
   .glitch-text::before {
     color: #00d4ff;
     z-index: -1;
     animation: glitch-anim-1 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
   }
+
   .glitch-text::after {
     color: #8b00ff;
     z-index: -2;
@@ -191,20 +220,55 @@
   }
 
   @keyframes glitch-anim-1 {
-    0% { transform: translate(0) }
-    20% { transform: translate(-3px, 1px) }
-    40% { transform: translate(-1px, -1px) }
-    60% { transform: translate(3px, 1px) }
-    80% { transform: translate(1px, -1px) }
-    100% { transform: translate(0) }
+    0% {
+      transform: translate(0)
+    }
+
+    20% {
+      transform: translate(-3px, 1px)
+    }
+
+    40% {
+      transform: translate(-1px, -1px)
+    }
+
+    60% {
+      transform: translate(3px, 1px)
+    }
+
+    80% {
+      transform: translate(1px, -1px)
+    }
+
+    100% {
+      transform: translate(0)
+    }
   }
+
   @keyframes glitch-anim-2 {
-    0% { transform: translate(0) }
-    20% { transform: translate(3px, -1px) }
-    40% { transform: translate(1px, 1px) }
-    60% { transform: translate(-3px, -1px) }
-    80% { transform: translate(-1px, 1px) }
-    100% { transform: translate(0) }
+    0% {
+      transform: translate(0)
+    }
+
+    20% {
+      transform: translate(3px, -1px)
+    }
+
+    40% {
+      transform: translate(1px, 1px)
+    }
+
+    60% {
+      transform: translate(-3px, -1px)
+    }
+
+    80% {
+      transform: translate(-1px, 1px)
+    }
+
+    100% {
+      transform: translate(0)
+    }
   }
 
   .text-neon-blue {
@@ -219,9 +283,12 @@
 
   /* Premium Achievement Card Styles */
   @keyframes accent-glow {
-    0%, 100% {
+
+    0%,
+    100% {
       box-shadow: 0 0 15px -5px var(--glow-primary), 0 0 0 1px var(--border-accent);
     }
+
     50% {
       box-shadow: 0 0 25px 2px var(--glow-primary), 0 0 0 2px var(--accent-primary);
     }
@@ -234,6 +301,7 @@
   .glow-sm {
     box-shadow: 0 0 15px -5px var(--glow-primary);
   }
+
   .glow-md {
     box-shadow: 0 0 25px -2px var(--glow-primary);
   }
