@@ -35,7 +35,7 @@ const socialIcons = [
     icon: LeetCodeLogo, 
     href: socialLinks.leetcode, 
     label: "LeetCode",
-    hoverClass: "hover:bg-[#FFA116] hover:text-white" 
+    hoverClass: "hover:bg-[var(--accent-primary)] hover:text-[var(--text-inverse)]" 
   },
   { 
     icon: Youtube, 
