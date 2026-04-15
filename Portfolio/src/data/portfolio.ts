@@ -201,7 +201,7 @@ export const certificates = [
     issuer: "Sangam University",
     description: "Secured III position by developing the CropPilot website for Innovation and Technological Advancement.",
     date: "15 March, 2026",
-    url: "https://res.cloudinary.com/dyahoqmz5/image/upload/v1774419414/SU_Hackathon_gqgfzn.jpg",
+    url: "https://res.cloudinary.com/dyahoqmz5/image/upload/v1774419414/SU_HACKATHON_gqgfzn.jpg",
   },
   {
     id: 2,
@@ -213,6 +213,14 @@ export const certificates = [
   },
   {
     id: 3,
+    title: "Fortune '26 - FinWiz",
+    issuer: "ASSETS, Delhi Technological University",
+    description: "Participation in the FinWiz competition organized by ASSETS at Delhi Technological University.",
+    date: "6-7 April, 2026",
+    url: "https://res.cloudinary.com/dyahoqmz5/image/upload/v1776231166/Fortune_26_b1wdag.png",
+  },
+  {
+    id: 4,
     title: "Solution Architecture Job Simulation",
     issuer: "aws-Forage",
     description: "Cloud architecture and design principles for scalable applications.",
@@ -220,7 +228,7 @@ export const certificates = [
     url: "https://res.cloudinary.com/dd80on9gu/image/upload/v1770378457/aws_b0q1nf.png",
   },
   {
-    id: 4,
+    id: 5,
     title: "be10X - AI Tools Workshop Bootcamp",
     issuer: "be10X",
     description: "Hands-on experience with popular AI tools and their applications in software development.",
@@ -228,7 +236,7 @@ export const certificates = [
     url: "https://res.cloudinary.com/dd80on9gu/image/upload/v1770378458/be10X_m0i8ux.png",
   },
   {
-    id: 5,
+    id: 6,
     title: "Front-End Software Engineering Job Simulation",
     issuer: "Skyscanner-Forage",
     description: "Building responsive user interfaces and implementing frontend best practices.",
@@ -236,7 +244,7 @@ export const certificates = [
     url: "https://res.cloudinary.com/dd80on9gu/image/upload/v1770378457/Skyscanner_lwosws.png",
   },
   {
-    id: 6,
+    id: 7,
     title: "Advanced Software Engineering Job Simulation",
     issuer: "Walmart-Forage",
     description: "Advanced software development concepts, including design patterns and system architecture.",
@@ -244,21 +252,13 @@ export const certificates = [
     url: "https://res.cloudinary.com/dd80on9gu/image/upload/v1770378457/Walmart_i1wslf.png",
   },
   {
-    id: 7,
+    id: 8,
     title: "Software Engineering Job Simulation",
     issuer: "Wells Fargo-Forage",
     description: "Comprehensive software engineering principles, including coding, testing, and deployment.",
     date: "2026",
     url: "https://res.cloudinary.com/dd80on9gu/image/upload/v1770378457/Wells_Fargo_kctplx.png",
   },
-  // {
-  //   id: 8,
-  //   title: "Comming Soon",
-  //   issuer: "Comming Soon",
-  //   description: "Stay tuned for upcoming certifications that will enhance my skills and knowledge.",
-  //   date: "2026",
-  //   url: "#",
-  // },
 ];
 
 export const navItems = [
