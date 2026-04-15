@@ -1,6 +1,8 @@
 export interface Skill {
   name: string;
+  count?: number;
   icon: string;
+  description: string;
   invertDark?: boolean;
 }
 
@@ -23,55 +25,57 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Languages & Frameworks",
     skills: [
-      { name: "JavaScript (ES6+)", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-      { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-      { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
-      { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
-      { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
-      { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-      { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+      { name: "JavaScript (ES6+)", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", description: "Mastery in ES6+, asynchronous programming, and DOM manipulation." },
+      { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", description: "Strong type-safety, interfaces, and advanced generics for robust code." },
+      { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg", description: "Deep understanding of memory management, STL, and OOP principles." },
+      { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg", description: "Foundational knowledge in system-level programming and data structures." },
+      { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", description: "Expertise in Hooks, Context API, and building high-performance SPAs." },
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", description: "Building scalable backend services and RESTful APIs with performance." },
+      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", description: "Crafting beautiful, responsive UIs with utility-first CSS speed." },
+      { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", description: "Semantic structure and modern web standards for accessibility." },
+      { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", description: "Modern layouts with Flexbox, Grid, and smooth CSS animations." },
+      { name: "Redux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg", description: "Predictable state management for complex React applications." },
     ],
   },
   {
     title: "Databases & Backend",
     skills: [
-      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
-      { name: "Supabase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" },
-      { name: "REST APIs", icon: "https://cdn.simpleicons.org/swagger" },
-      { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", invertDark: true },
+      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", description: "NoSQL DB management with complex aggregations and indexing." },
+      { name: "Supabase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg", description: "Leveraging real-time databases and authentication for speed." },
+      { name: "REST APIs", icon: "https://cdn.simpleicons.org/swagger", description: "Designing and consuming secure, well-documented API endpoints." },
+      { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", invertDark: true, description: "Middleware-driven backend architecture for fast web apps." },
     ],
   },
   {
     title: "Cloud & DevOps",
     skills: [
-      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", invertDark: true },
-      { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
-      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
-      { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg", invertDark: true },
-      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" },
-      { name: "GitHub Actions", icon: "https://cdn.simpleicons.org/githubactions/2088FF" },
-      { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-      { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", invertDark: true },
-      { name: "Render", icon: "https://cdn.simpleicons.org/render/46E3B7" },
+      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", invertDark: true, description: "Deploying and scaling applications using EC2, S3, and Lambda." },
+      { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg", description: "Utilizing cloud functions and storage for global scalability." },
+      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", description: "Integrating serverless features like Firestore and Auth in record time." },
+      { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg", invertDark: true, description: "Optimized deployment pipelines for frontend speed and reliability." },
+      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg", description: "Seamless CI/CD workflows for modern static and dynamic sites." },
+      { name: "GitHub Actions", icon: "https://cdn.simpleicons.org/githubactions/2088FF", description: "Automating CI/CD pipelines to ensure code quality and speed." },
+      { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", description: "Advanced version control with rebasing, branching, and merging." },
+      { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", invertDark: true, description: "Collaborative development and managing large open-source projects." },
+      { name: "Render", icon: "https://cdn.simpleicons.org/render/46E3B7", description: "Cloud platform for building and running apps with ease." },
     ],
   },
   {
     title: "Tools & Platforms",
     skills: [
-      { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
-      { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-      { name: "Notion", icon: "https://cdn.simpleicons.org/notion", invertDark: true },
-      { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
-      { name: "npm", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" },
+      { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg", description: "Thorough API testing and documentation for seamless integration." },
+      { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", description: "Translating high-fidelity designs into pixel-perfect frontend code." },
+      { name: "Notion", icon: "https://cdn.simpleicons.org/notion", invertDark: true, description: "Efficient project management and documentation for tech teams." },
+      { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", description: "Optimized development environment with custom workflows." },
+      { name: "npm", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg", description: "Managing complex package dependencies and custom scripts." },
     ],
   },
   {
     title: "Specialized",
     skills: [
-      { name: "3D Web Environments", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg", invertDark: true },
-      { name: "UI/UX Interactive Design", icon: "https://cdn.simpleicons.org/framer/0055FF" },
+      { name: "3D Web Environments", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg", invertDark: true, description: "Creating immersive 3D experiences using Unity and Three.js." },
+      { name: "UI/UX Interactive Design", icon: "https://cdn.simpleicons.org/framer/0055FF", description: "Applying design principles for engaging user interactions." },
+      { name: "Three.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg", description: "Creating high-performance 3D graphics and immersive animations in the browser.", invertDark: true },
     ],
   },
 ];
