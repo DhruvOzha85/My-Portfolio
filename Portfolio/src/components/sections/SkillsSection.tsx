@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { skillCategories } from "@/data/portfolio";
+import { skillCategories, Skill } from "@/data/portfolio";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 export function SkillsSection() {
@@ -56,38 +56,50 @@ export function SkillsSection() {
         </div>
 
         {/* Skills Grid */}
-        <motion.div layout className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-5">
+        <motion.div layout className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4 md:gap-5">
           <AnimatePresence mode="popLayout">
-            {displayedSkills.map((skill) => (
-              <motion.div
-                layout
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.3 }}
-                whileHover={{ y: -5, scale: 1.03 }}
-                className="bg-card w-full rounded-2xl p-4 md:p-6 border border-[var(--border-accent)] hover:border-[var(--accent-primary)]/50 transition-all duration-300 shadow-sm hover:shadow-xl hover:animate-accent-glow hover:glow-sm flex flex-col items-center justify-center gap-3 md:gap-4 cursor-default group"
-              >
-                <div className="relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center bg-secondary/50 rounded-2xl p-3 md:p-3.5 group-hover:bg-primary/10 transition-colors duration-300">
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    loading="lazy"
-                    decoding="async"
-                    className={`w-full h-full object-contain transition-all duration-300 drop-shadow-sm ${
-                      skill.invertDark ? "dark:invert opacity-80 group-hover:opacity-100" : ""
-                    }`}
-                  />
-                </div>
-                <span className="text-sm font-display font-medium text-center text-foreground/80 group-hover:text-primary transition-colors line-clamp-2 leading-tight">
-                  {skill.name}
-                </span>
-              </motion.div>
+            {displayedSkills.map((skill, index) => (
+              <SkillCard key={skill.name} skill={skill} index={index} />
             ))}
           </AnimatePresence>
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function SkillCard({ skill, index }: { skill: Skill; index: number }) {
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{ duration: 0.3, delay: index * 0.02 }}
+      className="relative w-full aspect-square bg-card rounded-2xl border border-[var(--border-accent)] hover:border-[var(--accent-primary)]/50 transition-all duration-500 shadow-sm hover:shadow-2xl group overflow-hidden cursor-default"
+    >
+      {/* Icon Layer */}
+      <div className="absolute inset-0 flex items-center justify-center p-4 transition-all duration-500 group-hover:blur-lg group-hover:scale-125 group-hover:opacity-10">
+        <img
+          src={skill.icon}
+          alt={skill.name}
+          loading="lazy"
+          decoding="async"
+          className={`w-12 h-12 md:w-16 md:h-16 object-contain transition-all duration-300 drop-shadow-sm ${
+            skill.invertDark ? "dark:invert opacity-90 group-hover:opacity-100" : ""
+          }`}
+        />
+      </div>
+
+      {/* Name Overlay Layer - High Visibility */}
+      <div className="absolute inset-0 flex items-center justify-center p-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+        <span className="text-sm sm:text-base md:text-xl font-display font-black text-center text-primary leading-tight px-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+          {skill.name}
+        </span>
+      </div>
+
+      {/* Subtle Glow Effect */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-t from-primary/20 via-primary/5 to-transparent" />
+    </motion.div>
   );
 }
