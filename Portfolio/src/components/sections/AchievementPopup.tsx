@@ -67,7 +67,7 @@ export function AchievementPopup() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden bg-card/80 backdrop-blur-3xl border-primary/20 shadow-[0_0_80px_-12px_rgba(var(--primary-rgb),0.5)]">
+      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden bg-card/80 backdrop-blur-3xl border-primary/20 shadow-[0_0_80px_-12px_rgba(var(--primary-rgb),0.5)]">
         <DialogTitle className="sr-only">Latest Achievement: {latestAchievement.title}</DialogTitle>
         
         <div className="relative group/popup">
@@ -79,7 +79,7 @@ export function AchievementPopup() {
             <X className="h-5 w-5" />
           </button>
 
-            <div className="h-[450px] w-full relative group/gallery transition-all duration-500">
+            <div className="h-[350px] w-full relative group/gallery transition-all duration-500">
               {/* Tech Decorations */}
               <div className="absolute top-4 left-4 z-50 flex items-center gap-2 pointer-events-none">
                 <Badge className="bg-[var(--bg-card)]/60 backdrop-blur-md border-[var(--border-accent)] text-[var(--accent-primary)] font-bold px-3 py-1">
@@ -94,7 +94,7 @@ export function AchievementPopup() {
                 <CarouselContent className="h-full">
                   {latestAchievement.photos.map((photo, i) => (
                     <CarouselItem key={i} className="h-full">
-                      <div className="relative h-[450px] w-full bg-[var(--bg-secondary)]/30">
+                      <div className="relative h-[350px] w-full bg-[var(--bg-secondary)]/30">
                          {/* Decorative Placeholder Background */}
                         <div className="absolute inset-0 flex items-center justify-center opacity-10">
                           <Trophy className="w-16 h-16 text-[var(--accent-primary)] animate-pulse" />
@@ -143,7 +143,7 @@ export function AchievementPopup() {
               transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
               className="absolute -bottom-6 left-8 p-4 rounded-2xl bg-[var(--accent-primary)] shadow-xl shadow-[var(--glow-primary)]/40 z-40"
             >
-              <Trophy className="h-8 w-8 text-[var(--bg-card)]" />
+              <Trophy className="h-6 w-6 text-[var(--bg-card)]" />
               <motion.div 
                 animate={{ rotate: 360 }}
                 transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
@@ -153,13 +153,13 @@ export function AchievementPopup() {
           </div>
 
           {/* Content */}
-          <div className="p-8 pt-10">
+          <div className="p-6 pt-8">
             <div className="flex items-center gap-2 mb-2">
               <Sparkles className="h-4 w-4 text-[var(--accent-primary)] animate-pulse" />
               <span className="text-xs font-bold uppercase tracking-widest text-[var(--accent-primary)]/80">Latest Achievement!</span>
             </div>
             
-            <h3 className="text-2xl font-display font-bold mb-3 gradient-text">
+            <h3 className="text-xl font-display font-bold mb-3 gradient-text">
               {latestAchievement.title}
             </h3>
             
@@ -170,7 +170,7 @@ export function AchievementPopup() {
             <div className="flex flex-col gap-3">
               <Button 
                 onClick={handleViewDetails}
-                className="w-full h-12 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-xl font-bold group text-[var(--bg-card)]"
+                className="w-full h-10 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] rounded-xl font-bold group text-[var(--bg-card)]"
               >
                 View Full Details
                 <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
