@@ -121,12 +121,14 @@
     padding: 2px;
     background: var(--gradient-primary);
     border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
     -webkit-mask-composite: xor;
+    mask-composite: exclude;
   }
 
   .glass {
+    -webkit-backdrop-filter: var(--navbar-blur);
     backdrop-filter: var(--navbar-blur);
     background: var(--navbar-bg);
     border-bottom: var(--navbar-border-bottom);
@@ -173,7 +175,7 @@
     display: inline-block;
     width: 10px;
     height: 1em;
-    background-color: #00d4ff;
+    background-color: var(--accent-primary);
     animation: blink 1s step-end infinite;
     vertical-align: text-bottom;
   }
@@ -208,77 +210,77 @@
   }
 
   .glitch-text::before {
-    color: #00d4ff;
+    color: var(--accent-primary);
     z-index: -1;
     animation: glitch-anim-1 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
   }
 
   .glitch-text::after {
-    color: #8b00ff;
+    color: var(--accent-secondary);
     z-index: -2;
     animation: glitch-anim-2 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite reverse;
   }
 
   @keyframes glitch-anim-1 {
     0% {
-      transform: translate(0)
+      transform: translate(0);
     }
 
     20% {
-      transform: translate(-3px, 1px)
+      transform: translate(-3px, 1px);
     }
 
     40% {
-      transform: translate(-1px, -1px)
+      transform: translate(-1px, -1px);
     }
 
     60% {
-      transform: translate(3px, 1px)
+      transform: translate(3px, 1px);
     }
 
     80% {
-      transform: translate(1px, -1px)
+      transform: translate(1px, -1px);
     }
 
     100% {
-      transform: translate(0)
+      transform: translate(0);
     }
   }
 
   @keyframes glitch-anim-2 {
     0% {
-      transform: translate(0)
+      transform: translate(0);
     }
 
     20% {
-      transform: translate(3px, -1px)
+      transform: translate(3px, -1px);
     }
 
     40% {
-      transform: translate(1px, 1px)
+      transform: translate(1px, 1px);
     }
 
     60% {
-      transform: translate(-3px, -1px)
+      transform: translate(-3px, -1px);
     }
 
     80% {
-      transform: translate(-1px, 1px)
+      transform: translate(-1px, 1px);
     }
 
     100% {
-      transform: translate(0)
+      transform: translate(0);
     }
   }
 
   .text-neon-blue {
-    color: #00d4ff;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3);
+    color: var(--accent-primary);
+    text-shadow: 0 0 10px var(--accent-primary), 0 0 20px var(--accent-muted);
   }
 
   .bg-neon-blue {
-    background-color: #00d4ff;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.4);
+    background-color: var(--accent-primary);
+    box-shadow: 0 0 10px var(--glow-primary), 0 0 20px var(--glow-secondary);
   }
 
   /* Premium Achievement Card Styles */
