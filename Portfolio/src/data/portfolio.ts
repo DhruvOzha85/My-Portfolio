@@ -51,10 +51,10 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", invertDark: true, description: "Deploying and scaling applications using EC2, S3, and Lambda." },
       { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg", description: "Utilizing cloud functions and storage for global scalability." },
-      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", description: "Integrating serverless features like Firestore and Auth in record time." },
+
       { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg", invertDark: true, description: "Optimized deployment pipelines for frontend speed and reliability." },
       { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg", description: "Seamless CI/CD workflows for modern static and dynamic sites." },
-      { name: "GitHub Actions", icon: "https://cdn.simpleicons.org/githubactions/2088FF", description: "Automating CI/CD pipelines to ensure code quality and speed." },
+
       { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", description: "Advanced version control with rebasing, branching, and merging." },
       { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", invertDark: true, description: "Collaborative development and managing large open-source projects." },
       { name: "Render", icon: "https://cdn.simpleicons.org/render/46E3B7", description: "Cloud platform for building and running apps with ease." },
@@ -73,8 +73,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Specialized",
     skills: [
-      { name: "3D Web Environments", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg", invertDark: true, description: "Creating immersive 3D experiences using Unity and Three.js." },
-      { name: "UI/UX Interactive Design", icon: "https://cdn.simpleicons.org/framer/0055FF", description: "Applying design principles for engaging user interactions." },
+
       { name: "Three.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg", description: "Creating high-performance 3D graphics and immersive animations in the browser.", invertDark: true },
     ],
   },
@@ -265,11 +264,64 @@ export const certificates = [
   },
 ];
 
+export interface FigmaDesign {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  figmaUrl: string;
+  category: string;
+}
+
+export const figmaDesigns: FigmaDesign[] = [
+  {
+    id: 1,
+    title: "Portfolio Prototype",
+    description: "The architectural blueprint and visual design system for high-performance portfolio environments.",
+    image: "/Figma2.png",
+    figmaUrl: "https://www.figma.com/design/bgSrRdEZSc0gkymmpwo2N0/Portfolio?node-id=0-1&t=bl4ZGdKXpatRGcFg-1",
+    category: "Product Design"
+  },
+  {
+    id: 2,
+    title: "Modular Interface 1",
+    description: "Exploration of modular grid systems and atomic design principles for scalable web interfaces.",
+    image: "/Figma4.png",
+    figmaUrl: "https://www.figma.com/design/0rMQgd2GQ8CWuFVhsTzVYf/Untitled?node-id=0-1&t=N3vXOrm4xzc5KykG-1",
+    category: "UI Exploration"
+  },
+  {
+    id: 3,
+    title: "Modular Interface 2",
+    description: "Iterative testing of user flows and navigation patterns in modern responsive web environments.",
+    image: "/Figma3.png",
+    figmaUrl: "https://www.figma.com/design/mSQ0A2pefx1nsIySbRnhzk/Untitled?node-id=0-1&t=YFs3JK3rEF80glRN-1",
+    category: "UX Research"
+  },
+  {
+    id: 4,
+    title: "Assignment S",
+    description: "A comprehensive UI exploration focused on layout hierarchy and component architecture for semi-complex information systems.",
+    image: "/Figma1.png",
+    figmaUrl: "https://www.figma.com/design/ud9WMRtPRi3REDVcDuSxXC/Assigment-s?node-id=0-1&t=6K9Ddjx5Vpmjhpqk-1",
+    category: "Academic Assessment"
+  },
+  {
+    id: 5,
+    title: "SU Semester 1 Assignment",
+    description: "Foundational UI/UX projects completed during the first semester, focusing on accessibility and usability standards.",
+    image: "/Figma5.png",
+    figmaUrl: "https://www.figma.com/design/I0oRvwSWnh3O3DmrjPssMe/Assignment-SU-Sem1?node-id=0-1&t=wjR0kilCj0wEip5v-1",
+    category: "Semester Project"
+  }
+];
+
 export const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Skills", href: "/skills" },
   { label: "Achievements", href: "/achievements" },
+  { label: "Designs", href: "/designs" },
   { label: "Projects", href: "/projects" },
   { label: "Certificates", href: "/certificates" },
   { label: "Contact", href: "/contact" },

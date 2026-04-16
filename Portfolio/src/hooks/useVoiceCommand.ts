@@ -249,6 +249,8 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
              const demoBtn = voiceEl.closest('div')?.querySelector<HTMLElement>('[data-voice-target$="-demo"]');
              if (demoBtn) {
                demoBtn.click();
+               wantsToListenRef.current = false;
+               setIsListening(false);
                speakWithPause(`Initiating mission protocol for ${projectTarget}. Connection established.`);
                return;
              }
@@ -259,6 +261,8 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
         for (const [key, link] of Object.entries(externalLinks)) {
           if (target.includes(key)) {
             openUrl(link.url, link.label);
+            wantsToListenRef.current = false;
+            setIsListening(false);
             speakWithPause(`Establishing uplink to ${link.label}. Access granted.`);
             return;
           }
@@ -269,6 +273,8 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
         if (voiceEl) {
           const label = voiceEl.dataset.voiceTarget || target;
           voiceEl.click();
+          wantsToListenRef.current = false;
+          setIsListening(false);
           speakWithPause(`Accessing ${label.replace(/-/g, " ")}. Telemetry stream active.`);
           return;
         }
@@ -279,6 +285,8 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
             const element = document.getElementById(sectionId);
             if (element) {
               element.scrollIntoView({ behavior: "smooth" });
+              wantsToListenRef.current = false;
+              setIsListening(false);
               speakWithPause(`Navigating to sector: ${sectionId.toUpperCase()}. Scan complete.`);
               return;
             }
@@ -298,10 +306,12 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
           if (command.includes(keyword)) {
             const element = document.getElementById(sectionId);
             if (element) {
-              element.scrollIntoView({ behavior: "smooth" });
-              speakWithPause(`Sector ${sectionId.toUpperCase()} reached. Scanning vitals.`);
-              return;
-            }
+               element.scrollIntoView({ behavior: "smooth" });
+               wantsToListenRef.current = false;
+               setIsListening(false);
+               speakWithPause(`Sector ${sectionId.toUpperCase()} reached. Scanning vitals.`);
+               return;
+             }
           }
         }
       }
@@ -349,6 +359,8 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
         if (voiceEl) {
           const label = voiceEl.dataset.voiceTarget || "element";
           voiceEl.click();
+          wantsToListenRef.current = false;
+          setIsListening(false);
           speakWithPause(`Uplink to ${label.replace(/-/g, " ")} confirmed.`);
           return;
         }
@@ -397,11 +409,15 @@ export function useVoiceCommand(onTourCommand?: (action: "start" | "stop") => vo
         const targetTheme = themes.find((t) => command.includes(t.name.toLowerCase()));
         if (targetTheme) {
           setTheme(targetTheme.id as ThemeName);
+          wantsToListenRef.current = false;
+          setIsListening(false);
           speakWithPause(`Visual matrix synchronized to ${targetTheme.name} theme.`);
           return;
         }
         if (command.includes("auto")) {
           setTheme("auto");
+          wantsToListenRef.current = false;
+          setIsListening(false);
           speakWithPause("Sector lighting set to Auto-Sync.");
           return;
         }

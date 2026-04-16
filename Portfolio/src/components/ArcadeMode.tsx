@@ -160,6 +160,13 @@ export function ArcadeMode() {
   const { isArcadeActive, score, exitArcade, addScore, lastPlayerX } = useArcadeMode();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const coinsRef = useRef<Coin[] | null>(null); // Persist coins across re-entries
+  const scoreRef = useRef(score); // Local ref for game loop to avoid re-renders
+  
+  // Keep scoreRef in sync with React state
+  useEffect(() => {
+    scoreRef.current = score;
+  }, [score]);
+
   const gameStateRef = useRef<{
     player: Player;
     camera: Camera;
@@ -499,7 +506,8 @@ export function ArcadeMode() {
       // Score
       ctx.textAlign = "right";
       ctx.fillStyle = NEON_GREEN;
-      ctx.fillText(`SCORE: ${score}`, W - 20, 32);
+      ctx.fillText(`SCORE: ${scoreRef.current}`, W - 20, 32);
+
 
       // Controls hint (bottom)
       ctx.fillStyle = "rgba(10, 10, 26, 0.6)";
@@ -531,7 +539,8 @@ export function ArcadeMode() {
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup", onKeyUp);
     };
-  }, [isArcadeActive, initGame, exitArcade, addScore, score]);
+  }, [isArcadeActive, initGame, exitArcade, addScore]);
+
 
   return (
     <AnimatePresence>
