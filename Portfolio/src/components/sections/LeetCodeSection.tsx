@@ -124,7 +124,45 @@ export function LeetCodeSection() {
         };
 
         const fetchWithFallbacks = async () => {
-          // Primary: leetcode-api-faisalshohag (Reliable & fast with calendar)
+          // Primary: alfa-leetcode-api.onrender.com (Most reliable currently)
+          try {
+            const [profileRes, solvedRes, calendarRes] = await Promise.all([
+              fetchWithTimeout(`https://alfa-leetcode-api.onrender.com/${username}`),
+              fetchWithTimeout(`https://alfa-leetcode-api.onrender.com/${username}/solved`),
+              fetchWithTimeout(`https://alfa-leetcode-api.onrender.com/${username}/calendar`)
+            ]);
+
+            if (profileRes.ok && solvedRes.ok && calendarRes.ok) {
+                const profile = await profileRes.json();
+                const solved = await solvedRes.json();
+                const calendarData = await calendarRes.json();
+                
+                if (!profile.errors && !solved.errors) {
+                   let cal = calendarData.submissionCalendar;
+                   if (typeof cal === 'string') {
+                     try { cal = JSON.parse(cal); } catch(e) { cal = {}; }
+                   }
+                   
+                   return {
+                      username: username,
+                      totalSolved: solved.solvedProblem || 0,
+                      easySolved: solved.easySolved || 0,
+                      mediumSolved: solved.mediumSolved || 0,
+                      hardSolved: solved.hardSolved || 0,
+                      totalQuestions: 3400, // Approximate standard
+                      easyTotal: 830,
+                      mediumTotal: 1750,
+                      hardTotal: 780,
+                      ranking: profile.ranking || 0,
+                      submissionCalendar: cal && Object.keys(cal).length > 0 ? cal : generateMockCalendar()
+                   };
+                }
+            }
+          } catch(e) {
+             console.warn("Primary API (Alfa) failed:", e);
+          }
+
+          // Fallback 1: leetcode-api-faisalshohag (Fast but often rate limited)
           try {
             const res = await fetchWithTimeout(`https://leetcode-api-faisalshohag.vercel.app/${username}`);
             if (res.ok) {
@@ -151,10 +189,10 @@ export function LeetCodeSection() {
               }
             }
           } catch (e) {
-            console.warn("Primary LeetCode API failed:", e);
+            console.warn("Fallback 1 (Faisalshohag) failed:", e);
           }
 
-          // Fallback 1: leetcode-stats-api.herokuapp.com (Very complete but sometimes hangs)
+          // Fallback 2: leetcode-stats-api.herokuapp.com (Often hangs or returns 503 HTML)
           try {
             const res = await fetchWithTimeout(`https://leetcode-stats-api.herokuapp.com/${username}`);
             if (res.ok) {
@@ -177,38 +215,7 @@ export function LeetCodeSection() {
               }
             }
           } catch (e) {
-            console.warn("Secondary LeetCode API failed:", e);
-          }
-
-          // Fallback 2: alfa-leetcode-api.onrender.com
-          try {
-            const [profileRes, solvedRes] = await Promise.all([
-              fetchWithTimeout(`https://alfa-leetcode-api.onrender.com/${username}`),
-              fetchWithTimeout(`https://alfa-leetcode-api.onrender.com/${username}/solved`)
-            ]);
-
-            if (profileRes.ok && solvedRes.ok) {
-                const profile = await profileRes.json();
-                const solved = await solvedRes.json();
-                
-                if (!profile.errors && !solved.errors) {
-                   return {
-                      username: username,
-                      totalSolved: solved.solvedProblem || 0,
-                      easySolved: solved.easySolved || 0,
-                      mediumSolved: solved.mediumSolved || 0,
-                      hardSolved: solved.hardSolved || 0,
-                      totalQuestions: 3400, // Approximate standard
-                      easyTotal: 830,
-                      mediumTotal: 1750,
-                      hardTotal: 780,
-                      ranking: profile.ranking || 0,
-                      submissionCalendar: generateMockCalendar()
-                   };
-                }
-            }
-          } catch(e) {
-             console.warn("Tertiary LeetCode API failed:", e);
+            console.warn("Fallback 2 (Herokuapp) failed:", e);
           }
           
           throw new Error("All proxy endpoints failed");

@@ -7,6 +7,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 // ─── Card dimensions (Responsive scaled for variety) ────────────────
@@ -17,12 +18,14 @@ const CARD_STEP = CARD_WIDTH + CARD_GAP;
 export function CertificatesSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showAllMobile, setShowAllMobile] = useState(false);
 
-  // REVERSE ORDER: [Last, ..., 1st=SU_HACKATHON]
-  // This allows us to move RIGHT while scrolling DOWN.
-  const reversedCertificates = [7, 6, 5, 4, 3, 2, 1].map(id => certificates.find(c => c.id === id)!);
+  // REVERSE ORDER: [Last (ID 8), ..., 1st (ID 1)]
+  // This ensures the newest/most important ones show first.
+  const sortedCertificates = [...certificates].sort((a, b) => b.id - a.id);
+  const mobileCertificates = showAllMobile ? sortedCertificates : sortedCertificates.slice(0, 3);
 
-  const certCount = reversedCertificates.length;
+  const certCount = sortedCertificates.length;
   const lastIndex = certCount - 1;
 
   const { scrollYProgress } = useScroll({
@@ -56,80 +59,115 @@ export function CertificatesSection() {
   };
 
   return (
-    <section
-      id="certificates"
-      ref={scrollRef}
-      className="relative"
-      style={{ 
-        height: `${(certCount + 1) * 90}vh`,
-        scrollMarginTop: "100px" 
-      }}
-    >
-      <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
+    <section id="certificates" className="relative scroll-mt-[100px]">
+      
+      {/* ─── Mobile / Tablet View ─── */}
+      <div className="block lg:hidden py-16 px-4 md:px-8 bg-background relative overflow-hidden">
         <div className="absolute inset-0 dot-grid opacity-10 pointer-events-none" />
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent z-10" />
 
-        {/* ─── Header ─── */}
-        <div className="relative z-20 pt-16 md:pt-24 pb-8 px-6 md:px-12 lg:px-20 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col items-center gap-2"
-          >
-            <div className="flex items-center gap-3">
-              <div className="h-[2px] w-12 bg-primary" />
-              <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">Achievements</span>
-              <div className="h-[2px] w-12 bg-primary" />
-            </div>
-            <h2 className="text-5xl md:text-7xl font-display font-bold tracking-tighter">
-              My <span className="gradient-text">Certificates</span>
-            </h2>
-          </motion.div>
-        </div>
-
-        {/* ─── Horizontal Track ─── */}
-        <div className="flex-1 flex items-center relative mt-4">
-          <motion.div
-            style={{ x }}
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="flex items-center" 
-          >
-            {reversedCertificates.map((cert, index) => (
-              <CertificateCard
-                key={cert.id}
-                cert={cert}
-                index={index}
-                activeFloat={activeFloat}
-              />
-            ))}
-          </motion.div>
-        </div>
-
-        {/* ─── Footer / Navigation Progress ─── */}
-        <div className="relative z-20 pb-16 flex flex-col items-center gap-10 px-6 md:px-20">
+        <div className="relative z-20 mb-10 pt-10 text-center flex flex-col items-center gap-2">
           <div className="flex items-center gap-3">
-            {[...Array(certCount)].map((_, i) => {
-                const dotIndex = lastIndex - i; 
-                return (
-                    <motion.div
-                    key={dotIndex}
-                    animate={{ 
-                        width: activeIndex === dotIndex ? 24 : 8,
-                        backgroundColor: activeIndex === dotIndex ? "var(--accent-primary)" : "rgba(255,255,255,0.1)",
-                        opacity: activeIndex === dotIndex ? 1 : 0.5
-                    }}
-                    className="h-2 rounded-full transition-all duration-300"
-                    />
-                );
-            })}
+            <div className="h-[2px] w-12 bg-primary" />
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">Achievements</span>
+            <div className="h-[2px] w-12 bg-primary" />
           </div>
-          <div className="hidden md:flex items-center gap-3 text-muted-foreground/40 text-[10px] font-bold uppercase tracking-[0.4em]">
-            <ChevronRight className="h-4 w-4 animate-pulse" />
-            Scroll to Navigate
+          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tighter">
+            My <span className="gradient-text">Certificates</span>
+          </h2>
+        </div>
+        
+        <div className="relative z-20 flex flex-col gap-8 md:gap-12 w-full max-w-sm md:max-w-xl mx-auto">
+          {mobileCertificates.map((cert, index) => (
+            <MobileCertificateCard key={cert.id} cert={cert} index={index} />
+          ))}
+        </div>
+
+        {sortedCertificates.length > 3 && (
+          <div className="relative z-20 mt-12 flex justify-center">
+            <Button 
+              variant="outline" 
+              onClick={() => setShowAllMobile(!showAllMobile)}
+              className="rounded-full px-8 border-primary text-primary hover:bg-primary/10 bg-background"
+            >
+              {showAllMobile ? "Show Less" : "Show More"}
+            </Button>
+          </div>
+        )}
+      </div>
+
+      {/* ─── Desktop View ─── */}
+      <div
+        ref={scrollRef}
+        className="hidden lg:block relative"
+        style={{ height: `${(certCount + 1) * 90}vh` }}
+      >
+        <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
+          <div className="absolute inset-0 dot-grid opacity-10 pointer-events-none" />
+          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent z-10" />
+
+          {/* ─── Header ─── */}
+          <div className="relative z-20 pt-16 md:pt-24 pb-8 px-6 md:px-12 lg:px-20 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center gap-2"
+            >
+              <div className="flex items-center gap-3">
+                <div className="h-[2px] w-12 bg-primary" />
+                <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">Achievements</span>
+                <div className="h-[2px] w-12 bg-primary" />
+              </div>
+              <h2 className="text-5xl md:text-7xl font-display font-bold tracking-tighter">
+                My <span className="gradient-text">Certificates</span>
+              </h2>
+            </motion.div>
+          </div>
+
+          {/* ─── Horizontal Track ─── */}
+          <div className="flex-1 flex items-center relative mt-4">
+            <motion.div
+              style={{ x }}
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="flex items-center" 
+            >
+              {sortedCertificates.map((cert, index) => (
+                <CertificateCard
+                  key={cert.id}
+                  cert={cert}
+                  index={index}
+                  activeFloat={activeFloat}
+                />
+              ))}
+            </motion.div>
+          </div>
+
+          {/* ─── Footer / Navigation Progress ─── */}
+          <div className="relative z-20 pb-16 flex flex-col items-center gap-10 px-6 md:px-20">
+            <div className="flex items-center gap-3">
+              {[...Array(certCount)].map((_, i) => {
+                  const dotIndex = lastIndex - i; 
+                  return (
+                      <motion.div
+                      key={dotIndex}
+                      animate={{ 
+                          width: activeIndex === dotIndex ? 24 : 8,
+                          backgroundColor: activeIndex === dotIndex ? "var(--accent-primary)" : "rgba(255,255,255,0.1)",
+                          opacity: activeIndex === dotIndex ? 1 : 0.5
+                      }}
+                      className="h-2 rounded-full transition-all duration-300"
+                      />
+                  );
+              })}
+            </div>
+            <div className="hidden lg:flex items-center gap-3 text-muted-foreground/40 text-[10px] font-bold uppercase tracking-[0.4em]">
+              <ChevronRight className="h-4 w-4 animate-pulse" />
+              Scroll to Navigate
+            </div>
           </div>
         </div>
       </div>
@@ -300,6 +338,99 @@ function CertificateCard({
               alt={cert.title}
               className="w-full h-full object-contain rounded-lg shadow-2xl"
             />
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+// ─── Individual Mobile Certificate Card ──────────────────────────────────
+function MobileCertificateCard({ cert, index }: { cert: any; index: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const isWinner = cert.id === 1;
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        className="relative group shrink-0 mx-auto w-full flex flex-col gap-3"
+        onClick={() => setIsOpen(true)}
+      >
+        <div className={cn(
+          "relative h-72 md:h-80 rounded-3xl overflow-hidden border transition-all duration-500",
+          isWinner 
+            ? "border-primary/50 shadow-[0_0_40px_rgba(var(--primary-rgb),0.3)] bg-primary/5" 
+            : "border-white/10 bg-white/5",
+          "hover:border-primary/50 shadow-2xl"
+        )}>
+          {/* Certificate Image - Clean, No Overlay */}
+          <img 
+            src={cert.url} 
+            alt={cert.title}
+            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+          />
+
+          {/* Winner Badge */}
+          {isWinner && (
+            <div className="absolute top-4 left-4 z-20">
+              <div className="px-3 py-1.5 rounded-full bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-[0.2em] shadow-lg flex items-center gap-1.5">
+                <Trophy className="h-3 w-3" />
+                WINNER
+              </div>
+            </div>
+          )}
+        </div>
+        
+        {/* Simple Label Below Image on Card */}
+        <div className="px-2 text-center">
+           <h3 className="text-sm font-bold text-foreground">
+             {cert.title}
+           </h3>
+           <p className="text-[10px] text-muted-foreground uppercase tracking-widest mt-1">Tap to View Details</p>
+        </div>
+      </motion.div>
+
+      {/* Lightbox Dialog for Mobile - Shows Image and Description Below */}
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent className="max-w-[95vw] w-[95vw] rounded-2xl p-0 overflow-hidden bg-background/95 backdrop-blur-xl border border-white/10 flex flex-col max-h-[90vh]">
+          <DialogTitle className="sr-only">{cert.title}</DialogTitle>
+          
+          <div className="w-full bg-black/50 p-2 flex-shrink-0 relative">
+            <img 
+              src={cert.url} 
+              alt={cert.title}
+              className="w-full h-auto max-h-[50vh] object-contain rounded-lg mx-auto"
+            />
+          </div>
+
+          <div className="p-6 overflow-y-auto flex-1">
+            <div className="flex items-center gap-2 mb-2">
+              <Target className="h-4 w-4 text-primary" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/90">{cert.issuer}</span>
+            </div>
+            
+            <h3 className="text-xl font-bold text-foreground mb-3 tracking-tight">
+              {cert.title}
+            </h3>
+            
+            <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border/50">
+              <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">{cert.date}</span>
+            </div>
+            
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+              {cert.description}
+            </p>
+            
+            <Button 
+              className="w-full mt-2" 
+              onClick={() => setIsOpen(false)}
+            >
+              Close
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

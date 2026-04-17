@@ -68,7 +68,7 @@
           <div className="hidden md:flex items-center gap-8">
             <ul className="flex items-center gap-6">
               {navItems.map((item) => (
-                <li key={item.href}>
+                  <li key={item.href}>
                   <NavLink
                     to={item.href}
                     onClick={(e) => {
@@ -76,7 +76,7 @@
                       handleClick(item.href);
                     }}
                     className={({ isActive }) => cn(
-                      "text-sm font-medium transition-colors hover:text-primary relative py-2",
+                      "text-base font-medium transition-colors hover:text-primary relative py-2 px-1",
                       isActive ? "text-primary" : "text-muted-foreground"
                     )}
                   >
@@ -95,7 +95,7 @@
             <div className="flex items-center gap-2 pl-4 border-l border-border">
               <Button
                 variant="ghost"
-                className="text-sm font-medium text-muted-foreground hover:text-primary h-9 px-4 hidden lg:flex"
+                className="text-base font-medium text-muted-foreground hover:text-primary h-9 px-4 hidden lg:flex"
                 onClick={() => { playClick(); window.open("/DhruvOzha.pdf", "_blank"); }}
               >
                 Resume
@@ -105,7 +105,7 @@
                 size="icon"
                 onClick={() => { playClick(); toggleArcade(); }}
                 title="Arcade Mode (Ctrl+G)"
-                className="text-muted-foreground hover:text-primary"
+                className="text-muted-foreground hover:text-primary hidden lg:flex"
               >
                 <Gamepad2 className="h-5 w-5" />
               </Button>
@@ -115,18 +115,9 @@
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => { playClick(); toggleArcade(); }}
-              title="Arcade Mode"
-              className="text-muted-foreground hover:text-primary"
-            >
-              <Gamepad2 className="h-4 w-4" />
-            </Button>
             <ThemePicker />
             <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </nav>
@@ -137,12 +128,32 @@
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden glass border-t border-border"
+              exit={{ opacity: 0, height: 0, transition: { duration: 0.2 } }}
+              className="md:hidden glass border-t border-border overflow-hidden"
             >
-              <ul className="container mx-auto px-4 py-4 flex flex-col gap-4">
+              <motion.ul 
+                initial="hidden"
+                animate="show"
+                variants={{
+                  hidden: { opacity: 0 },
+                  show: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.1,
+                      delayChildren: 0.1
+                    }
+                  }
+                }}
+                className="container mx-auto px-4 py-12 flex flex-col gap-8"
+              >
                 {navItems.map((item) => (
-                  <li key={item.href}>
+                  <motion.li 
+                    key={item.href}
+                    variants={{
+                      hidden: { opacity: 0, x: -20 },
+                      show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+                    }}
+                  >
                     <NavLink
                       to={item.href}
                       onClick={(e) => {
@@ -150,26 +161,31 @@
                         handleClick(item.href);
                       }}
                       className={({ isActive }) => cn(
-                        "block py-2 text-lg font-medium transition-colors",
-                        isActive ? "text-primary" : "text-muted-foreground"
+                        "block py-3 text-3xl font-bold transition-colors tracking-wide",
+                        isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
                       )}
                     >
                       {item.label}
                     </NavLink>
-                  </li>
+                  </motion.li>
                 ))}
-                <li>
+                <motion.li
+                  variants={{
+                    hidden: { opacity: 0, x: -20 },
+                    show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+                  }}
+                >
                   <a
                     href="/DhruvOzha.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => { playClick(); setIsOpen(false); }}
-                    className="block py-2 text-lg font-medium text-primary"
+                    className="block py-3 text-3xl font-bold text-primary hover:text-primary/80 transition-colors tracking-wide"
                   >
                     Resume
                   </a>
-                </li>
-              </ul>
+                </motion.li>
+              </motion.ul>
             </motion.div>
           )}
         </AnimatePresence>
