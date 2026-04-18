@@ -2,7 +2,7 @@
   import { motion, AnimatePresence } from "framer-motion";
   import { Menu, X, Gamepad2 } from "lucide-react";
   import { Button } from "@/components/ui/button";
-  import { navItems } from "@/data/portfolio";
+  import { navItems, socialLinks } from "@/data/portfolio";
   import { useActiveSection } from "@/hooks/useActiveSection";
   import { useSound } from "@/hooks/useSound";
   import { ThemePicker } from "@/components/ThemePicker";
@@ -96,7 +96,8 @@
               <Button
                 variant="ghost"
                 className="text-base font-medium text-muted-foreground hover:text-primary h-9 px-4 hidden lg:flex"
-                onClick={() => { playClick(); window.open("/DhruvOzha.pdf", "_blank"); }}
+                data-voice-target="resume"
+                onClick={() => { playClick(); window.open(socialLinks.resume, "_blank"); }}
               >
                 Resume
               </Button>
@@ -176,9 +177,10 @@
                   }}
                 >
                   <a
-                    href="/DhruvOzha.pdf"
+                    href={socialLinks.resume}
                     target="_blank"
                     rel="noopener noreferrer"
+                    data-voice-target="resume"
                     onClick={() => { playClick(); setIsOpen(false); }}
                     className="block py-3 text-3xl font-bold text-primary hover:text-primary/80 transition-colors tracking-wide"
                   >

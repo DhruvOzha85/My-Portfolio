@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { FileText, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ResumeAssembly3D } from "@/components/ResumeAssembly3D";
+import { socialLinks } from "@/data/portfolio";
 
 export function ResumeSection() {
   return (
@@ -50,10 +51,9 @@ export function ResumeSection() {
               <Button
                 size="lg"
                 className="flex-1 gradient-bg"
+                data-voice-target="resume"
                 onClick={() => {
-                  // Placeholder - will be replaced with actual resume link
-                  // alert("Resume will be available soon! Please add your resume PDF.");
-                  window.open("https://dhruvozha-resume.vercel.app/", "_blank");
+                  window.open(socialLinks.resume, "_blank");
                 }}
               >
                 <Eye className="h-5 w-5 mr-2" />

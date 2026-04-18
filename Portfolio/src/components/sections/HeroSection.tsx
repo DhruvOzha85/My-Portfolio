@@ -212,7 +212,8 @@ export function HeroSection() {
                     size="lg"
                     variant="ghost"
                     className="text-primary hover:text-primary-foreground transition-all duration-300 border-2 border-dashed border-primary/50 hover:border-primary hover:bg-primary/90 px-8 disabled:opacity-50 disabled:pointer-events-none ring-offset-background"
-                    onClick={() => window.open("/DhruvOzha.pdf", "_blank")}
+                    data-voice-target="resume"
+                    onClick={() => window.open(socialLinks.resume, "_blank")}
                   >
                     View Resume
                   </Button>

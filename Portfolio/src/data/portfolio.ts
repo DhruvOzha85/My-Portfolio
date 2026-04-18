@@ -19,6 +19,7 @@ export const socialLinks = {
   leetcode: "https://leetcode.com/u/DhruvOzha/",
   email: "ozhadhruv@gmail.com",
   twitter: "https://x.com/dhruvozha85",
+  resume: "https://drive.google.com/file/d/1zC7YZAFqyQJCz9qWp4dKX0CzCLZOXSqy/view?usp=sharing",
 };
 
 export const skillCategories: SkillCategory[] = [
