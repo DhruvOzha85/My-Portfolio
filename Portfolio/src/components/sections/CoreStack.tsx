@@ -45,6 +45,19 @@ export function CoreStack() {
   return (
     <section id="skills" className="section-padding relative overflow-hidden" aria-label="Core Stack">
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16 md:mb-24"
+        >
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight">
+            MY <span className="gradient-text">SKILLS</span>
+          </h2>
+          <div className="h-2 w-32 bg-primary mx-auto mt-6 rounded-full opacity-50 animate-pulse" />
+        </motion.div>
+
         <div className="flex flex-col lg:flex-row gap-16 lg:items-center">
           
           {/* Left Side Content */}

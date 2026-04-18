@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent, MotionValue } from "framer-motion";
-import { ExternalLink, Github, Youtube } from "lucide-react";
+import { ExternalLink, Github, Youtube, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/data/portfolio";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
@@ -12,7 +12,7 @@ function voiceSlug(title: string): string {
 }
 
 // ─── Card dimensions ───────────────────────────────────────────────
-const CARD_WIDTH = 520;       // px — base card width (large as requested)
+const CARD_WIDTH = 450;       // px — base card width (reduced from 520)
 const CARD_GAP = 40;          // px — gap between cards
 const CARD_STEP = CARD_WIDTH + CARD_GAP; // total step per card
 
@@ -61,6 +61,19 @@ export function ProjectsSection() {
           <p className="text-muted-foreground text-sm md:text-base max-w-lg mx-auto">
             A curated showcase of high-performance builds.
           </p>
+          <motion.div 
+            initial={{ opacity: 0, y: -5 }}
+            whileInView={{ opacity: 1, y: [0, 5, 0] }}
+            transition={{ 
+              opacity: { duration: 0.5 },
+              y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+            }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center gap-1 text-muted-foreground/40 mt-6"
+          >
+            <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Scroll</span>
+            <ChevronDown className="w-4 h-4" />
+          </motion.div>
         </div>
         
         <div className="flex flex-col gap-8 md:gap-12">
@@ -99,6 +112,18 @@ export function ProjectsSection() {
             <p className="text-muted-foreground text-sm md:text-base max-w-lg mx-auto">
               A curated showcase of high-performance builds.
             </p>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, y: [0, 5, 0] }}
+              transition={{ 
+                opacity: { duration: 1 },
+                y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+              }}
+              className="flex flex-col items-center gap-1 text-muted-foreground/40 mt-8 mb-4"
+            >
+              <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Scroll</span>
+              <ChevronDown className="w-4 h-4" />
+            </motion.div>
           </div>
 
           {/* ─── Horizontal Track ─── */}
@@ -185,7 +210,7 @@ function ProjectCard({
           )}
         >
           {/* Image */}
-          <div className="relative overflow-hidden bg-secondary/30 flex items-center justify-center h-72 md:h-80">
+          <div className="relative overflow-hidden bg-secondary/30 flex items-center justify-center h-64 md:h-72">
             {isFlagship && (
               <span className="absolute top-4 left-4 z-20 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-primary text-primary-foreground rounded-full shadow-xl flex items-center gap-1.5 backdrop-blur-md">
                 ✨ Flagship
@@ -309,7 +334,7 @@ function MobileProjectCard({ project, index }: { project: (typeof projects)[numb
       )}
     >
       {/* Image */}
-      <div className="relative overflow-hidden bg-secondary/30 flex items-center justify-center h-72 md:h-80">
+      <div className="relative overflow-hidden bg-secondary/30 flex items-center justify-center h-64 md:h-72">
         {isFlagship && (
           <span className="absolute top-4 left-4 z-20 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-primary text-primary-foreground rounded-full shadow-xl flex items-center gap-1.5 backdrop-blur-md">
             ✨ Flagship
