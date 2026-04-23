@@ -196,6 +196,16 @@ export const projects: Project[] = [
     youtubeUrl: "https://youtu.be/01tgMMf891Q?si=ysIizkspTnXRBh5b",
     featured: true,
   },
+  {
+    id: 10,
+    title: "GyaanSetu",
+    description: "An inclusive EdTech platform designed for the 'Digital Courtyard', offering multilingual courses in English, Hindi, and Gujarati. It features a student-focused dashboard, interactive learning paths, and a clean, modern UI optimized for accessibility.",
+    image: "/gyaansetu_mockup.png",
+    techStack: ["React", "TypeScript", "Tailwind CSS", "Redux", "Supabase", "Vite"],
+    liveUrl: "https://gyaansetuu.vercel.app/",
+    githubUrl: "https://github.com/DhruvOzha85/GyaanSetu/tree/main",
+    featured: true,
+  },
 ];
 
 export const certificates = [
