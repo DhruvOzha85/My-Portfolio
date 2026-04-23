@@ -161,7 +161,7 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-muted-foreground text-lg"
+              className="text-foreground/85 text-lg"
             >
               Hello, I'm
             </motion.p>
@@ -194,7 +194,7 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="max-w-2xl text-muted-foreground text-lg"
+              className="max-w-2xl text-foreground/85 text-lg"
             >
               Passionate about building beautiful, functional web applications.
               I love turning ideas into reality through clean code and creative design.

@@ -18,8 +18,8 @@
   --bg-glow-footer: radial-gradient(ellipse 50% 60% at 20% 100%, #6366f108, transparent);
   --bg-noise-overlay: none; --bg-grid-lines: rgba(99,102,241,0.03);
   --ambient-light: 0 0 120px 40px #6366f108; --hero-spotlight: radial-gradient(circle at 50% 40%, #6366f110 0%, transparent 70%);
-  --text-primary: #1e293b; --text-secondary: #475569; --text-muted: #94a3b8;
-  --text-disabled: #cbd5e1; --text-inverse: #ffffff; --text-heading: #0f172a;
+  --text-primary: #1e293b; --text-secondary: #334155; --text-muted: #64748b;
+  --text-disabled: #94a3b8; --text-inverse: #ffffff; --text-heading: #0f172a;
   --text-link: #6366f1; --text-link-hover: #4f46e5; --text-code: #6366f1;
   --text-highlight: #6366f1; --text-error: #ef4444; --text-success: #22c55e; --text-warning: #f59e0b;
   --font-family-heading: 'Space Grotesk', 'Inter', sans-serif;
@@ -74,7 +74,7 @@
   --popover: 0 0% 100%; --popover-foreground: 222 47% 17%;
   --primary: 239 84% 67%; --primary-foreground: 0 0% 100%;
   --secondary: 210 40% 96%; --secondary-foreground: 222 47% 17%;
-  --muted: 210 40% 96%; --muted-foreground: 215 16% 57%;
+  --muted: 210 40% 96%; --muted-foreground: 215 25% 40%;
   --accent: 270 70% 60%; --accent-foreground: 0 0% 100%;
   --destructive: 0 84% 60%; --destructive-foreground: 0 0% 100%;
   --border: 214 32% 91%; --input: 214 32% 91%; --ring: 239 84% 67%;
@@ -424,8 +424,8 @@
   --bg-glow-footer: radial-gradient(ellipse 50% 60% at 20% 100%, #ec489910, transparent);
   --bg-noise-overlay: none; --bg-grid-lines: rgba(236,72,153,0.03);
   --ambient-light: 0 0 120px 40px #ec489908; --hero-spotlight: radial-gradient(circle at 50% 40%, #ec489912 0%, transparent 70%);
-  --text-primary: #831843; --text-secondary: #9d4070; --text-muted: #c47090;
-  --text-disabled: #e8a0c0; --text-inverse: #ffffff; --text-heading: #4a0e2a;
+  --text-primary: #831843; --text-secondary: #5d0d2e; --text-muted: #831843;
+  --text-disabled: #c47090; --text-inverse: #ffffff; --text-heading: #4a0e2a;
   --text-link: #ec4899; --text-link-hover: #f472b6; --text-code: #db2777;
   --text-highlight: #ec4899; --text-error: #ef4444; --text-success: #10b981; --text-warning: #f59e0b;
   --font-family-heading: 'Space Grotesk', 'Inter', sans-serif;
@@ -479,7 +479,7 @@
   --popover: 0 0% 100%; --popover-foreground: 330 60% 18%;
   --primary: 330 81% 60%; --primary-foreground: 0 0% 100%;
   --secondary: 330 60% 94%; --secondary-foreground: 330 60% 18%;
-  --muted: 330 60% 94%; --muted-foreground: 330 30% 55%;
+  --muted: 330 60% 94%; --muted-foreground: 330 30% 35%;
   --accent: 270 70% 60%; --accent-foreground: 0 0% 100%;
   --destructive: 0 84% 60%; --destructive-foreground: 0 0% 100%;
   --border: 330 50% 87%; --input: 330 50% 87%; --ring: 330 81% 60%;
@@ -748,8 +748,8 @@
   --bg-glow-footer: radial-gradient(ellipse 50% 60% at 20% 100%, #f472b608, transparent);
   --bg-noise-overlay: none; --bg-grid-lines: rgba(244,114,182,0.03);
   --ambient-light: 0 0 120px 40px #f472b608; --hero-spotlight: radial-gradient(circle at 50% 40%, #f472b610 0%, transparent 70%);
-  --text-primary: #6b2140; --text-secondary: #95406a; --text-muted: #c07090;
-  --text-disabled: #dea0b8; --text-inverse: #ffffff; --text-heading: #4a0e2a;
+  --text-primary: #6b2140; --text-secondary: #4a0e2a; --text-muted: #6b2140;
+  --text-disabled: #95406a; --text-inverse: #ffffff; --text-heading: #2d0819;
   --text-link: #e84393; --text-link-hover: #f472b6; --text-code: #d63384;
   --text-highlight: #e84393; --text-error: #ef4444; --text-success: #10b981; --text-warning: #d4a017;
   --font-family-heading: 'Space Grotesk', 'Inter', sans-serif;
@@ -803,7 +803,7 @@
   --popover: 0 0% 100%; --popover-foreground: 340 60% 26%;
   --primary: 330 86% 70%; --primary-foreground: 0 0% 100%;
   --secondary: 350 60% 96%; --secondary-foreground: 340 60% 26%;
-  --muted: 350 60% 96%; --muted-foreground: 340 30% 55%;
+  --muted: 350 60% 96%; --muted-foreground: 340 30% 35%;
   --accent: 45 75% 47%; --accent-foreground: 340 60% 26%;
   --destructive: 0 84% 60%; --destructive-foreground: 0 0% 100%;
   --border: 340 50% 90%; --input: 340 50% 90%; --ring: 330 86% 70%;

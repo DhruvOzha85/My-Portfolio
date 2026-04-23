@@ -9,7 +9,7 @@ export function AchievementsSection({
   onImageClick?: (achievement: Achievement, index: number) => void 
 }) {
   return (
-    <section id="achievements" className="section-padding relative overflow-hidden">
+    <section id="achievements" className="section-padding relative overflow-hidden scroll-mt-[100px]">
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -47,7 +47,7 @@ export function AchievementsSection({
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
             Achievements <span className="gradient-text">🏆</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-secondary-foreground/80 text-lg max-w-2xl mx-auto">
             Moments that defined the journey — hackathons, wins & collaborations.
           </p>
           <div className="mt-8 flex justify-center">

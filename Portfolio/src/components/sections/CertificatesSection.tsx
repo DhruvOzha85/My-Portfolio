@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent, MotionValue, AnimatePresence } from "framer-motion";
 import { Award, Trophy, ChevronRight, Target } from "lucide-react";
 import { certificates } from "@/data/portfolio";
@@ -41,7 +41,15 @@ export function CertificatesSection() {
     setActiveIndex(Math.round(v));
   });
 
-  const baseOffset = (typeof window !== 'undefined' ? window.innerWidth / 2 : 750) - (CARD_WIDTH / 2);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [windowWidth]);
+
+  const baseOffset = (windowWidth / 2) - (CARD_WIDTH / 2);
   
   // Translation X: moves the track RIGHT as we scroll DOWN.
   const x = useTransform(activeFloat, [0, lastIndex], [baseOffset, baseOffset - (lastIndex * CARD_STEP)]);
@@ -390,7 +398,7 @@ function MobileCertificateCard({ cert, index }: { cert: any; index: number }) {
            <h3 className="text-sm font-bold text-foreground">
              {cert.title}
            </h3>
-           <p className="text-[10px] text-muted-foreground uppercase tracking-widest mt-1">Tap to View Details</p>
+           <p className="text-[10px] text-secondary-foreground/70 uppercase tracking-widest mt-1">Tap to View Details</p>
         </div>
       </motion.div>
 
@@ -421,7 +429,7 @@ function MobileCertificateCard({ cert, index }: { cert: any; index: number }) {
               <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">{cert.date}</span>
             </div>
             
-            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+            <p className="text-secondary-foreground text-sm leading-relaxed mb-4">
               {cert.description}
             </p>
             

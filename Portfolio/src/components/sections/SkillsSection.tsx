@@ -14,7 +14,7 @@ export function SkillsSection() {
       : skillCategories.find((c) => c.title === activeTab)?.skills || [];
 
   return (
-    <section id="skills" className="section-padding relative" aria-label="Technical Skills">
+    <section id="skills" className="section-padding relative scroll-mt-[100px]" aria-label="Technical Skills">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -24,9 +24,9 @@ export function SkillsSection() {
           className="text-center mb-10 md:mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-            My <span className="gradient-text">Skills</span>
+            My <span className="text-primary">Skills</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-secondary-foreground/80 max-w-2xl mx-auto">
             Technologies, languages, and tools I use to build things.
           </p>
         </motion.div>

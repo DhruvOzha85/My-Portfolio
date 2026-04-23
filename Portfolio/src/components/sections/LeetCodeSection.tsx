@@ -50,12 +50,12 @@ interface LeetCodeStats {
      >
        <div className="flex items-center gap-2 mb-2">
          <Icon className="h-4 w-4" style={{ color }} />
-         <span className="text-sm text-muted-foreground">{label}</span>
+         <span className="text-sm text-secondary-foreground/80">{label}</span>
        </div>
        <div className="flex items-baseline gap-1">
          <span className="text-2xl font-bold font-display" style={{ color }}>{value}</span>
          {total && (
-           <span className="text-sm text-muted-foreground">/ {total}</span>
+           <span className="text-sm text-secondary-foreground/80">/ {total}</span>
          )}
        </div>
      </motion.div>
@@ -252,7 +252,7 @@ export function LeetCodeSection() {
   }, []);
  
   return (
-     <section id="leetcode" className="section-padding">
+     <section id="leetcode" className="section-padding scroll-mt-[100px]">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -299,7 +299,7 @@ export function LeetCodeSection() {
                    <h3 className="text-xl md:text-2xl font-display font-bold mb-2">
                      {stats?.username || 'DhruvOzha'}
                    </h3>
-                   <p className="text-muted-foreground text-sm md:text-base mb-4">
+                   <p className="text-secondary-foreground/80 text-sm md:text-base mb-4">
                      Actively practicing Data Structures and Algorithms
                    </p>
                    {stats?.ranking && stats.ranking > 0 && (

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent, MotionValue } from "framer-motion";
 import { ExternalLink, Github, Youtube, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ function voiceSlug(title: string): string {
 }
 
 // ─── Card dimensions ───────────────────────────────────────────────
-const CARD_WIDTH = 450;       // px — base card width (reduced from 520)
+const CARD_WIDTH = 420;       // px — base card width (reduced further)
 const CARD_GAP = 40;          // px — gap between cards
 const CARD_STEP = CARD_WIDTH + CARD_GAP; // total step per card
 
@@ -21,8 +21,8 @@ export function ProjectsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showAllMobile, setShowAllMobile] = useState(false);
 
-  // Requested Order: CropPilot (2), AI Adaptive (3), PinIndia (4), others
-  const sortedProjects = [2, 3, 4, 1, 5, 6, 7, 8, 9].map(id => projects.find(p => p.id === id)!);
+  // Requested Order: CropPilot (2), GyaanSetu (10), AI Adaptive (3), PinIndia (4), others
+  const sortedProjects = [2, 10, 3, 4, 1, 5, 6, 7, 8, 9].map(id => projects.find(p => p.id === id)!);
   const mobileProjects = showAllMobile ? sortedProjects : sortedProjects.slice(0, 3);
 
   const projectCount = sortedProjects.length;
@@ -35,7 +35,7 @@ export function ProjectsSection() {
   });
 
   // activeFloat 0 -> lastIndex
-  const activeFloat = useTransform(scrollYProgress, [0.1, 0.9], [0, lastIndex]);
+  const activeFloat = useTransform(scrollYProgress, [0, 1], [0, lastIndex]);
 
   // Track the active index for the progress dots
   useMotionValueEvent(activeFloat, "change", (v) => {
@@ -44,14 +44,24 @@ export function ProjectsSection() {
 
   // Horizontal translation: 
   // Base offset to center index 0 at start
-  const baseOffset = (typeof window !== 'undefined' ? window.innerWidth / 2 : 750) - (CARD_WIDTH / 2);
-  
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [windowWidth]);
+
+  // Horizontal translation: 
+  // Base offset to center index 0 at start
+  const baseOffset = (windowWidth / 2) - (CARD_WIDTH / 2);
+
   // Total X = baseOffset - scroll-linked offset
   const x = useTransform(activeFloat, [0, lastIndex], [baseOffset, baseOffset - (lastIndex * CARD_STEP)]);
 
   return (
     <section id="projects" className="relative scroll-mt-[100px]">
-      
+
       {/* ─── Mobile / Tablet View ─── */}
       <div className="block lg:hidden py-16 px-4 md:px-8 bg-background">
         <div className="mb-10 text-center">
@@ -61,10 +71,10 @@ export function ProjectsSection() {
           <p className="text-muted-foreground text-sm md:text-base max-w-lg mx-auto">
             A curated showcase of high-performance builds.
           </p>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -5 }}
             whileInView={{ opacity: 1, y: [0, 5, 0] }}
-            transition={{ 
+            transition={{
               opacity: { duration: 0.5 },
               y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
             }}
@@ -75,7 +85,7 @@ export function ProjectsSection() {
             <ChevronDown className="w-4 h-4" />
           </motion.div>
         </div>
-        
+
         <div className="flex flex-col gap-8 md:gap-12">
           {mobileProjects.map((project, index) => (
             <MobileProjectCard key={project.id} project={project} index={index} />
@@ -84,8 +94,8 @@ export function ProjectsSection() {
 
         {sortedProjects.length > 3 && (
           <div className="mt-12 flex justify-center">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={() => setShowAllMobile(!showAllMobile)}
               className="rounded-full px-8 border-primary text-primary hover:bg-primary/10"
             >
@@ -105,21 +115,21 @@ export function ProjectsSection() {
         <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
 
           {/* ─── Header ─── */}
-          <div className="relative z-20 pt-10 md:pt-14 pb-2 px-6 md:px-12 lg:px-20 text-center">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-2">
+          <div className="relative z-20 pt-16 md:pt-24 pb-1 px-6 md:px-12 lg:px-20 text-center">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-2">
               My <span className="gradient-text">Projects</span>
             </h2>
             <p className="text-muted-foreground text-sm md:text-base max-w-lg mx-auto">
               A curated showcase of high-performance builds.
             </p>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, y: [0, 5, 0] }}
-              transition={{ 
+              transition={{
                 opacity: { duration: 1 },
                 y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
               }}
-              className="flex flex-col items-center gap-1 text-muted-foreground/40 mt-8 mb-4"
+              className="flex flex-col items-center gap-1 text-muted-foreground/40 mt-4 mb-2"
             >
               <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Scroll</span>
               <ChevronDown className="w-4 h-4" />
@@ -175,7 +185,7 @@ function ProjectCard({
 }) {
   // Only CropPilot (ID 2) is the Flagship
   const isFlagship = project.id === 2;
-  
+
   // Distance from current focus
   const distance = useTransform(activeFloat, (v) => Math.abs(index - v));
 
@@ -187,6 +197,7 @@ function ProjectCard({
 
   // Slight vertical offset for depth
   const y = useTransform(distance, [0, 1, 2], [0, 15, 30]);
+  const zIndex = useTransform(distance, [0, 1], [20, 10]);
 
   return (
     <motion.div
@@ -194,9 +205,10 @@ function ProjectCard({
         scale,
         opacity,
         y,
+        zIndex,
         width: CARD_WIDTH,
       }}
-      className="flex-shrink-0 relative z-10 transition-[z-index] duration-300"
+      className="flex-shrink-0 relative transition-[z-index] duration-300"
     >
       <div style={{ marginRight: CARD_GAP }}>
         {/* ─── Card ─── */}
@@ -210,7 +222,7 @@ function ProjectCard({
           )}
         >
           {/* Image */}
-          <div className="relative overflow-hidden bg-secondary/30 flex items-center justify-center h-64 md:h-72">
+          <div className="relative overflow-hidden bg-secondary/30 flex items-center justify-center h-48 md:h-56">
             {isFlagship && (
               <span className="absolute top-4 left-4 z-20 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-primary text-primary-foreground rounded-full shadow-xl flex items-center gap-1.5 backdrop-blur-md">
                 ✨ Flagship
@@ -227,16 +239,16 @@ function ProjectCard({
           </div>
 
           {/* Details */}
-          <div className="flex flex-col justify-between p-5 md:p-7 flex-1">
+          <div className="flex flex-col justify-between p-4 md:p-6 flex-1">
             <div>
               <h3 className="text-xl md:text-2xl font-display font-bold group-hover:text-primary transition-colors mb-2">
                 {project.title}
               </h3>
-              <p className="text-muted-foreground text-sm mb-4 line-clamp-3 leading-relaxed">
+              <p className="text-secondary-foreground/80 text-sm mb-4 line-clamp-3 leading-relaxed">
                 {project.description}
               </p>
 
-              <div className="flex flex-wrap gap-1.5 mb-5">
+              <div className="flex flex-wrap gap-1 mb-4">
                 {project.techStack.map((tech) => (
                   <span
                     key={tech}
@@ -355,7 +367,7 @@ function MobileProjectCard({ project, index }: { project: (typeof projects)[numb
           <h3 className="text-xl md:text-2xl font-display font-bold text-foreground hover:text-primary transition-colors mb-2">
             {project.title}
           </h3>
-          <p className="text-muted-foreground text-sm mb-4 line-clamp-4 leading-relaxed">
+          <p className="text-secondary-foreground/80 text-sm mb-4 line-clamp-4 leading-relaxed">
             {project.description}
           </p>
 

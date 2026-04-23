@@ -115,7 +115,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-padding" aria-label="Contact Information">
+    <section id="contact" className="section-padding scroll-mt-[100px]" aria-label="Contact Information">
       <div className="container mx-auto px-4">
         {/* ... (existing header code) ... */}
         <motion.div
@@ -128,7 +128,7 @@ export function ContactSection() {
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
             Get In <span className="gradient-text">Touch</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-secondary-foreground/80 max-w-2xl mx-auto">
             Have a question or want to work together? Feel free to reach out!
           </p>
         </motion.div>

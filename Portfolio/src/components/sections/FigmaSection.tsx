@@ -19,7 +19,7 @@ export function FigmaSection() {
   const displayedDesigns = showAll ? figmaDesigns : figmaDesigns.slice(0, 3);
 
   return (
-    <section id="designs" className="section-padding relative overflow-hidden" aria-label="UI/UX Designs">
+    <section id="designs" className="section-padding relative overflow-hidden scroll-mt-[100px]" aria-label="UI/UX Designs">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 animate-pulse-slow" />
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent-primary/5 rounded-full blur-[100px] -z-10" />
@@ -34,7 +34,7 @@ export function FigmaSection() {
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
             UI/UX <span className="gradient-text">Designs</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-secondary-foreground/80 max-w-2xl mx-auto">
             A collection of high-fidelity prototypes and architectural blueprints for digital products, focused on usability and modern aesthetics.
           </p>
         </motion.div>
@@ -73,10 +73,10 @@ export function FigmaSection() {
 
                     {/* Content */}
                     <div className="p-8 space-y-4">
-                      <h3 className="text-xl font-display font-bold text-white group-hover:text-primary transition-colors">
+                      <h3 className="text-xl font-display font-bold text-foreground group-hover:text-primary transition-colors">
                         {design.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed h-12 line-clamp-2">
+                      <p className="text-sm text-secondary-foreground/80 leading-relaxed h-12 line-clamp-2">
                         {design.description}
                       </p>
 

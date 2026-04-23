@@ -77,7 +77,7 @@
                     }}
                     className={({ isActive }) => cn(
                       "text-base font-medium transition-colors hover:text-primary relative py-2 px-1",
-                      isActive ? "text-primary" : "text-muted-foreground"
+                      isActive ? "text-primary" : "text-secondary-foreground/80"
                     )}
                   >
                     {item.label}

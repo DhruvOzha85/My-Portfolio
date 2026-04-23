@@ -77,7 +77,7 @@ export function CoreStack() {
                 <MonitorDisplay skill={hoveredSkill} />
               </div>
 
-              <p className="text-muted-foreground text-lg md:text-xl max-w-xl leading-relaxed">
+              <p className="text-secondary-foreground/85 text-lg md:text-xl max-w-xl leading-relaxed">
                 A highly curated, modern ecosystem of technologies I leverage to build robust, 
                 scalable applications from the ground up to deployment.
               </p>

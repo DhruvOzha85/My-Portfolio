@@ -19,7 +19,7 @@ export function ResumeSection() {
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
             My <span className="gradient-text">Resume</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-secondary-foreground max-w-2xl mx-auto">
             View my professional resume
           </p>
         </motion.div>
@@ -43,7 +43,7 @@ export function ResumeSection() {
             <h3 className="text-xl font-display font-semibold mb-2">
               Dhruv Ozha
             </h3>
-            <p className="text-muted-foreground text-sm mb-6">
+            <p className="text-secondary-foreground text-sm mb-6">
               Aspiring Software Developer • Resume
             </p>
 
